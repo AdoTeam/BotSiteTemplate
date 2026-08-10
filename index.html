@@ -1,314 +1,192 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MatcheroBot</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
-}
-
-body{
-    background:#f4f4f4;
-    color:#222;
-}
-
-/* Header */
-header{
-    background:#181818;
-    color:white;
-    padding:18px 60px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.logo{
-    font-size:28px;
-    font-weight:700;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:25px;
-    transition:.2s;
-}
-
-nav a:hover{
-    color:#cfcfcf;
-}
-
-/* Hero */
-.hero{
-    height:450px;
-    background:linear-gradient(135deg,#1b1b1b,#303030);
-    color:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-}
-
-.hero h1{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-.hero p{
-    font-size:18px;
-    color:#d6d6d6;
-}
-
-.hero button{
-    margin-top:25px;
-    padding:14px 30px;
-    border:none;
-    border-radius:10px;
-    background:white;
-    color:black;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:16px;
-}
-
-.hero button:hover{
-    opacity:.9;
-}
-
-/* Products */
-.products{
-    padding:60px;
-}
-
-.products h2{
-    margin-bottom:25px;
-    font-size:32px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
-
-.card-content{
-    padding:18px;
-}
-
-.card-content h3{
-    margin-bottom:10px;
-}
-
-.price{
-    margin-top:12px;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.buy{
-    width:100%;
-    margin-top:15px;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#222;
-    color:white;
-    cursor:pointer;
-}
-
-.buy:hover{
-    background:black;
-}
-
-/* Footer */
-footer{
-    background:#181818;
-    color:white;
-    text-align:center;
-    padding:30px;
-    margin-top:50px;
-}
-
-/* FAQ */
-.faq-box{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    width:340px;
-    background:white;
-    border-radius:15px;
-    box-shadow:0 0 20px rgba(0,0,0,.15);
-    padding:15px;
-}
-
-.faq-box h3{
-    margin-bottom:10px;
-}
-
-.faq-box details{
-    background:#f3f3f3;
-    margin-top:10px;
-    border-radius:10px;
-    padding:12px;
-}
-
-.faq-box summary{
-    cursor:pointer;
-    font-weight:600;
-}
-
-.faq-box p{
-    margin-top:8px;
-    color:#555;
-}
-
-/* Mobile */
-@media(max-width:768px){
-
-header{
-    flex-direction:column;
-    gap:15px;
-    padding:20px;
-}
-
-nav{
-    text-align:center;
-}
-
-nav a{
-    display:inline-block;
-    margin:5px;
-}
-
-.hero h1{
-    font-size:38px;
-}
-
-.products{
-    padding:25px;
-}
-
-.faq-box{
-    width:90%;
-    right:5%;
-}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İki Kişilik Kart Oyunu</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            margin: 0;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .panel {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .player-panel {
+            background-color: #ffffff;
+            border-left: 2px solid #ccc;
+            border-right: 2px solid #ccc;
+        }
+        .center-panel {
+            flex: 0.8;
+            justify-content: center;
+            background-color: #e9ecef;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        #draw-btn {
+            padding: 20px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        #draw-btn:hover {
+            background-color: #0056b3;
+        }
+        .turn-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #d9534f;
+        }
+        .inventory {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 250px;
+            margin-top: 15px;
+        }
+        .card {
+            border: 2px solid #555;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: #fff3cd;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .delete-btn {
+            padding: 8px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <div class="logo">Matchero Bot</div>
+    <!-- Sol Kısım: Player 1 -->
+    <div class="panel player-panel">
+        <h2>Player 1</h2>
+        <p>Kart Sayısı: <span id="p1-count">0</span> / 7</p>
+        <div id="p1-inventory" class="inventory"></div>
+    </div>
 
-    <nav>
-        <a href="#">Ana Sayfa</a>
-        <a href="#">Ürünler</a>
-        <a href="#">Kategoriler</a>
-        <a href="#">Sepet</a>
-        <a href="#">Giriş Yap</a>
-    </nav>
-</header>
+    <!-- Orta Kısım: Zar ve Sıra -->
+    <div class="panel center-panel">
+        <div id="turn-display" class="turn-text">Sıra: Player 1</div>
+        <button id="draw-btn" onclick="drawCard()">Kart Çek</button>
+    </div>
 
-<section class="hero">
-    <h1>Matchero Bot Hizmetleri</h1>
-    <p>Kaliteli ve Ucuz Hizmet bizden sorulur</p>
-</section>
+    <!-- Sağ Kısım: Player 2 -->
+    <div class="panel player-panel">
+        <h2>Player 2</h2>
+        <p>Kart Sayısı: <span id="p2-count">0</span> / 7</p>
+        <div id="p2-inventory" class="inventory"></div>
+    </div>
 
-<section class="products">
-    <h2>Hizmetlerimiz</h2>
+    <script>
+        // Oyun Ayarları ve Değişkenler
+        const cardTypes = ["Kötülük", "Güç", "Bilgelik", "Element"];
+        const maxCards = 7;
+        
+        let p1Cards = [];
+        let p2Cards = [];
+        let currentTurn = 1;
 
-    <div class="grid">
+        // Kart Çekme Fonksiyonu
+        function drawCard() {
+            let activeCards = currentTurn === 1 ? p1Cards : p2Cards;
 
-        <div class="card">
-            <img src="https://picsum.photos/400/300?1">
-            <div class="card-content">
-                <h3>PRO Kitle Paketi</h3>
-                <p>Özellikler = 10000+ Abone,3 video slotu </p>
-                <div class="price">₺1999</div>
-                <button class="buy">Sepete Ekle</button>
-            </div>
-        </div>
+            // Envanter doluluk kontrolü
+            if (activeCards.length >= maxCards) {
+                alert(`Player ${currentTurn} envanteri dolu! Lütfen kart çekmeden önce bir kart silin.`);
+                return; 
+            }
 
-        <div class="card">
-            <img src="https://picsum.photos/400/300?2">
-            <div class="card-content">
-                <h3>büyük Kitle Paketi</h3>
-                <p>Özellikler = 5000+ Abone,1 video slotu</p>
-                <div class="price">₺1399</div>
-                <button class="buy">Sepete Ekle</button>
-            </div>
-        </div>
+            // Rastgele kart seçimi
+            let randomCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+            activeCards.push(randomCard);
 
-        <div class="card">
-            <img src="https://picsum.photos/400/300?3">
-            <div class="card-content">
-                <h3>Pro Ünlenme Paketi</h3>
-                <p>Özellikler = 15000+ kişilik Kitle</p>
-                <div class="price">₺3199</div>
-                <button class="buy">Sepete Ekle</button>
-            </div>
-        </div>
-</section>
+            // Sırayı değiştir
+            currentTurn = currentTurn === 1 ? 2 : 1;
 
-<footer>
-    © 2026 MatcheroBot - Tüm Hakları Saklıdır
-</footer>
+            // Ekranı güncelle
+            updateUI();
+        }
 
-<div class="faq-box">
+        // Kart Silme Fonksiyonu
+        function deleteCard(playerNum, index) {
+            if (playerNum === 1) {
+                p1Cards.splice(index, 1);
+            } else {
+                p2Cards.splice(index, 1);
+            }
+            updateUI();
+        }
 
-    <h3>❓ Sık Sorulan Sorular</h3>
+        // Ekranı Yenileme Fonksiyonu
+        function updateUI() {
+            // Sıra metnini güncelle
+            let turnText = document.getElementById("turn-display");
+            turnText.innerText = `Sıra: Player ${currentTurn}`;
+            turnText.style.color = currentTurn === 1 ? "#d9534f" : "#0275d8";
 
-    <details>
-        <summary>Bot ile Kitlenin farkı nedir?</summary>
-        <p>kısacamsponsorluk ile insanlar hesabınıza yönlendirilir.</p>
-    </details>
+            // Player 1 Güncelleme
+            document.getElementById("p1-count").innerText = p1Cards.length;
+            let p1Html = "";
+            p1Cards.forEach((card, index) => {
+                p1Html += `
+                    <div class="card">
+                        ${card}
+                        <button class="delete-btn" onclick="deleteCard(1, ${index})">Sil</button>
+                    </div>`;
+            });
+            document.getElementById("p1-inventory").innerHTML = p1Html;
 
-    <details>
-        <summary>Hizmetiniz neden yavaş?</summary>
-        <p>Malesef Kitle yönlendirme sponsorluk ile çalıştığı için bazı durumlarda hız sorunları yaşanabilir.</p>
-    </details>
+            // Player 2 Güncelleme
+            document.getElementById("p2-count").innerText = p2Cards.length;
+            let p2Html = "";
+            p2Cards.forEach((card, index) => {
+                p2Html += `
+                    <div class="card">
+                        ${card}
+                        <button class="delete-btn" onclick="deleteCard(2, ${index})">Sil</button>
+                    </div>`;
+            });
+            document.getElementById("p2-inventory").innerHTML = p2Html;
+        }
 
-    <details>
-        <summary>Hangi ödeme yöntemleri var?</summary>
-        <p>Kredi kartı, banka kartı ve havale ile ödeme yapabilirsiniz.</p>
-    </details>
-
-    <details>
-        <summary>Müşteri desteği nasıl ulaşılır?</summary>
-        <p>7/24 canlı destek ve e-posta desteğimiz bulunmaktadır.</p>
-    </details>
-
-</div>
-
+        // Başlangıçta ekranı bir kere oluştur
+        updateUI();
+    </script>
 </body>
 </html>
