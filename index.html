@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameGuardian X - Android Memory Engine</title>
+    <title>GG.ENGINE X - 3D Android Memory Engine & Hex Modifier</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,500;0,700;0,800;1,400&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Anime.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
@@ -19,237 +20,890 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            500: '#00f2fe',
-                            600: '#4facfe',
-                            accent: '#7928CA',
-                            dark: '#090d16',
-                            card: '#111827',
-                            border: 'rgba(255, 255, 255, 0.08)'
+                        cyber: {
+                            bg: '#05070f',
+                            panel: '#0d1322',
+                            card: '#131b2e',
+                            border: '#1e293b',
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            purple: '#7928ca',
+                            pink: '#ff007f',
+                            neon: '#39ff14',
+                            amber: '#ffb703'
                         }
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Space Grotesk', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
+
     <style>
+        /* BASE & CYBER BG */
         body {
-            background-color: #060911;
-            color: #f3f4f6;
+            background-color: #05070f;
+            color: #f1f5f9;
             overflow-x: hidden;
+            perspective: 1200px;
         }
-        .glow-bg {
-            background: radial-gradient(circle at 50% 20%, rgba(79, 172, 254, 0.15) 0%, rgba(121, 40, 202, 0.1) 40%, rgba(6, 9, 17, 0) 70%);
+
+        .cyber-grid {
+            background-image: 
+                linear-gradient(to right, rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
-        .glass-panel {
-            background: rgba(17, 24, 39, 0.7);
+
+        /* HARDCORE 3D BUTTONS */
+        .btn-3d {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 12px;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+        }
+
+        /* 3D Cyan Primary Push Button */
+        .btn-3d-cyan {
+            background: linear-gradient(180deg, #00f2fe 0%, #00b4d8 100%);
+            color: #020617;
+            border: 1px solid #7dd3fc;
+            box-shadow: 
+                0 6px 0 #0284c7,
+                0 12px 20px rgba(0, 242, 254, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+        .btn-3d-cyan:hover {
+            background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+            box-shadow: 
+                0 8px 0 #0369a1,
+                0 16px 25px rgba(0, 242, 254, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
+            transform: translateY(-5px);
+        }
+        .btn-3d-cyan:active {
+            transform: translateY(3px);
+            box-shadow: 
+                0 1px 0 #0369a1,
+                0 3px 8px rgba(0, 242, 254, 0.3),
+                inset 0 1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* 3D Purple Accent Push Button */
+        .btn-3d-purple {
+            background: linear-gradient(180deg, #a855f7 0%, #7e22ce 100%);
+            color: #ffffff;
+            border: 1px solid #d8b4fe;
+            box-shadow: 
+                0 6px 0 #581c87,
+                0 12px 20px rgba(168, 85, 247, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        .btn-3d-purple:hover {
+            background: linear-gradient(180deg, #c084fc 0%, #6b21a8 100%);
+            box-shadow: 
+                0 8px 0 #3b0764,
+                0 16px 25px rgba(168, 85, 247, 0.6);
+            transform: translateY(-5px);
+        }
+        .btn-3d-purple:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #3b0764, 0 3px 8px rgba(168, 85, 247, 0.3);
+        }
+
+        /* 3D Dark/Metal Button */
+        .btn-3d-dark {
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            color: #38bdf8;
+            border: 1px solid #334155;
+            box-shadow: 
+                0 6px 0 #020617,
+                0 10px 15px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        .btn-3d-dark:hover {
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+            color: #00f2fe;
+            box-shadow: 
+                0 8px 0 #020617,
+                0 14px 20px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .btn-3d-dark:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #020617, 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 3D Neon Emerald Button */
+        .btn-3d-emerald {
+            background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+            color: #022c22;
+            border: 1px solid #6ee7b7;
+            box-shadow: 
+                0 6px 0 #064e3b,
+                0 12px 20px rgba(16, 185, 129, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+        .btn-3d-emerald:hover {
+            background: linear-gradient(180deg, #34d399 0%, #065f46 100%);
+            box-shadow: 0 8px 0 #022c22, 0 16px 25px rgba(16, 185, 129, 0.6);
+            transform: translateY(-5px);
+        }
+        .btn-3d-emerald:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #022c22, 0 3px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        /* 3D CARDS & PANELS */
+        .card-3d {
+            background: linear-gradient(135deg, rgba(19, 27, 46, 0.8) 0%, rgba(13, 19, 34, 0.9) 100%);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                20px 20px 50px rgba(0, 0, 0, 0.6),
+                -10px -10px 30px rgba(255, 255, 255, 0.01),
+                inset 0 0 15px rgba(0, 242, 254, 0.05);
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out, box-shadow 0.3s ease;
         }
-        .glass-card {
-            background: rgba(22, 30, 49, 0.5);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: border-color 0.3s ease;
+
+        .card-3d:hover {
+            box-shadow: 
+                25px 25px 60px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(0, 242, 254, 0.25),
+                inset 0 0 20px rgba(0, 242, 254, 0.1);
         }
-        .glass-card:hover {
-            border-color: rgba(0, 242, 254, 0.4);
+
+        /* 3D FLOATING HARDWARE CONTAINER */
+        .window-3d {
+            background: #090e1a;
+            border-radius: 20px;
+            border: 2px solid #1e293b;
+            box-shadow: 
+                0 30px 60px -12px rgba(0, 0, 0, 0.9),
+                0 18px 36px -18px rgba(0, 242, 254, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            transform-style: preserve-3d;
         }
-        .cyber-grid {
-            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
+
+        /* GLOW & EFFECTS */
+        .neon-text-cyan {
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.6), 0 0 20px rgba(0, 242, 254, 0.3);
+        }
+        .neon-text-pink {
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.3);
+        }
+        
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 242, 254, 0.05) 50%,
+                rgba(0, 242, 254, 0.05)
+            );
+            background-size: 100% 4px;
+        }
+
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05070f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+            border: 1px solid #334155;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f2fe;
         }
     </style>
 </head>
-<body class="cyber-grid font-sans antialiased selection:bg-brand-500 selection:text-black">
+<body class="cyber-grid min-h-screen font-sans selection:bg-cyber-cyan selection:text-black scanline">
 
-    <!-- ARKA PLAN IŞIKLARI -->
-    <div class="fixed inset-0 glow-bg pointer-events-none z-0"></div>
-
-    <!-- NAVBAR -->
-    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-brand-border">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center shadow-lg shadow-brand-500/20 logo-icon">
-                    <i class="fa-solid fa-microchip text-xl text-white"></i>
-                </div>
-                <span class="font-extrabold text-xl tracking-wider text-white font-mono">GG<span class="text-brand-500">.ENGINE</span></span>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
-                <a href="#features" class="hover:text-brand-500 transition-colors">Özellikler</a>
-                <a href="#simulator" class="hover:text-brand-500 transition-colors">Canlı Simülatör</a>
-                <a href="#specs" class="hover:text-brand-500 transition-colors">Teknik Detaylar</a>
-                <a href="#faq" class="hover:text-brand-500 transition-colors">SSS</a>
-            </div>
-
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto card-3d rounded-2xl px-6 py-3 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> v101.0 Stable
-                </span>
-                <a href="#download" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-black font-semibold text-sm shadow-lg shadow-brand-500/25 hover:opacity-90 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-                    İndir (APK)
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-cyan to-cyber-purple flex items-center justify-center shadow-lg shadow-cyber-cyan/30 transform rotate-3 hover:rotate-0 transition-transform">
+                    <i class="fa-solid fa-microchip text-2xl text-black"></i>
+                </div>
+                <div>
+                    <span class="font-mono font-extrabold text-xl tracking-wider text-white flex items-center gap-2">
+                        GG.ENGINE <span class="text-xs px-2 py-0.5 rounded bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40">PRO v10.4</span>
+                    </span>
+                    <p class="text-[10px] font-mono text-gray-400">ANDROID MEMORY INJECTOR & SPEEDHACK</p>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <div class="hidden lg:flex items-center gap-8 font-mono text-sm">
+                <a href="#simulator" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-terminal text-xs text-cyber-cyan"></i> Simülatör
+                </a>
+                <a href="#features" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-xs text-cyber-purple"></i> Özellikler
+                </a>
+                <a href="#hexview" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-code text-xs text-cyber-neon"></i> Hex Düzenleyici
+                </a>
+                <a href="#download" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-download text-xs text-cyber-pink"></i> İndir
+                </a>
+            </div>
+
+            <!-- Top CTA Button -->
+            <div class="flex items-center gap-3">
+                <a href="#simulator" class="btn-3d btn-3d-cyan px-5 py-2.5 text-xs">
+                    <i class="fa-solid fa-play mr-2"></i> CANLI ARAYÜZ
                 </a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative pt-36 pb-20 px-6 max-w-7xl mx-auto z-10">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/20 border border-brand-accent/40 text-purple-300 text-xs font-mono mb-6 hero-badge opacity-0">
-                    <i class="fa-solid fa-bolt text-amber-400"></i> Android 5.0 - 15+ & ARM64 Desteği
+    <!-- HERO SECTION WITH 3D PERSPECTIVE TILT -->
+    <section class="relative pt-36 pb-20 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Column: Text & 3D CTAs -->
+            <div class="lg:col-span-6 space-y-8">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-cyber-card border border-cyber-cyan/30 text-cyber-cyan font-mono text-xs shadow-lg">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyber-neon animate-ping"></span>
+                    <span>NO-ROOT & ROOT DOKUNSAL DÜZENLEYİCİ</span>
                 </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight text-white mb-6 hero-title opacity-0">
-                    Oyun Belleğini <br>
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 via-brand-600 to-purple-400">
-                        Sınırların Ötesinde
+
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
+                    Bellek Offsetlerini <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple neon-text-cyan">
+                        3D Hassasiyetle
                     </span> <br>
                     Yönetin.
                 </h1>
-                <p class="text-gray-400 text-lg mb-8 leading-relaxed hero-desc opacity-0 max-w-xl">
-                    Android platformu için geliştirilmiş en güçlü Hex/RAM düzenleyici. Offsets arama, pointer zincirleme, hız hilesi (Speedhack) ve Lua betik motoru tek bir yüzen arayüzde.
+
+                <p class="text-gray-400 font-sans text-base sm:text-lg leading-relaxed">
+                    Android platformundaki IL2CPP, Native C++ ve Java bellek alanlarını gerçek zamanlı tarayın, dword/float değerlerini dondurun, Lua scriptleri çalıştırın ve hız hilesi yapın.
                 </p>
-                <div class="flex flex-wrap gap-4 hero-btns opacity-0">
-                    <a href="#download" class="px-8 py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-brand-500/20 hover:scale-105 transition-transform">
-                        <i class="fa-solid fa-download text-lg"></i>
-                        <span>GG Engine APK İndir</span>
+
+                <!-- 3D Button Group -->
+                <div class="flex flex-wrap gap-5 pt-2">
+                    <a href="#download" class="btn-3d btn-3d-cyan px-8 py-4 text-sm">
+                        <i class="fa-solid fa-download mr-3 text-lg"></i> GG ENGINE APK İNDİR
                     </a>
-                    <a href="#simulator" class="px-8 py-4 rounded-xl glass-panel text-white font-semibold flex items-center gap-3 border border-brand-border hover:bg-white/5 transition-colors">
-                        <i class="fa-solid fa-terminal text-brand-500"></i>
-                        <span>Simülatörü Dene</span>
+                    <a href="#simulator" class="btn-3d btn-3d-purple px-8 py-4 text-sm">
+                        <i class="fa-solid fa-flask mr-3 text-lg"></i> SIMÜLATÖRÜ AÇ
                     </a>
                 </div>
 
-                <!-- İSTATİSTİKLER -->
-                <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-brand-border hero-stats opacity-0">
-                    <div>
-                        <div class="text-2xl font-mono font-bold text-white stat-number" data-value="1500000">0</div>
-                        <div class="text-xs text-gray-500 font-mono mt-1">İndirme</div>
+                <!-- Stats Bar -->
+                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-cyber-border font-mono">
+                    <div class="card-3d p-4 rounded-xl text-center">
+                        <div class="text-2xl font-black text-cyber-cyan stat-counter" data-target="2400000">0</div>
+                        <div class="text-[10px] text-gray-400 mt-1">İNDİRME</div>
                     </div>
-                    <div>
-                        <div class="text-2xl font-mono font-bold text-brand-500 stat-number" data-value="64">0</div>
-                        <div class="text-xs text-gray-500 font-mono mt-1">Bit Mimarisi</div>
+                    <div class="card-3d p-4 rounded-xl text-center">
+                        <div class="text-2xl font-black text-cyber-purple">ARM64-v8a</div>
+                        <div class="text-[10px] text-gray-400 mt-1">MİMARİ</div>
                     </div>
-                    <div>
-                        <div class="text-2xl font-mono font-bold text-purple-400 stat-number" data-value="99">0</div>
-                        <div class="text-xs text-gray-500 font-mono mt-1">% Tespit Edilemezlik</div>
+                    <div class="card-3d p-4 rounded-xl text-center">
+                        <div class="text-2xl font-black text-cyber-neon">&lt; 1ms</div>
+                        <div class="text-[10px] text-gray-400 mt-1">RAM TARAMA</div>
                     </div>
                 </div>
             </div>
 
-            <!-- FLOATING UI MOCKUP -->
-            <div class="relative flex justify-center hero-mockup opacity-0">
-                <div class="w-full max-w-md glass-panel rounded-2xl p-5 border border-brand-border shadow-2xl relative">
-                    <!-- Üst Başlık / Bar -->
-                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-brand-border">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
-                            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
-                            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
-                            <span class="text-xs font-mono text-gray-400 ml-2">com.game.target (PID: 8492)</span>
+            <!-- Right Column: Interactive 3D Floating Window Graphic -->
+            <div class="lg:col-span-6 relative perspective-1000">
+                <div id="hero-tilt-card" class="window-3d p-6 relative z-10 transition-transform duration-100 ease-out">
+                    <!-- Window Header -->
+                    <div class="flex items-center justify-between pb-4 border-b border-cyber-border mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3.5 h-3.5 rounded-full bg-red-500 shadow-md shadow-red-500/50"></span>
+                            <span class="w-3.5 h-3.5 rounded-full bg-amber-500 shadow-md shadow-amber-500/50"></span>
+                            <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 shadow-md shadow-emerald-500/50"></span>
+                            <span class="font-mono text-xs text-gray-400 ml-2">com.pubg.kng (PID: 14209)</span>
                         </div>
-                        <i class="fa-solid fa-gear text-gray-400 hover:text-white cursor-pointer"></i>
-                    </div>
-
-                    <!-- Yüzen Pencere Temsili -->
-                    <div class="space-y-3 font-mono text-xs">
-                        <div class="p-3 rounded-lg bg-black/40 border border-brand-border flex justify-between items-center">
-                            <span class="text-gray-400">Bulunan Adres:</span>
-                            <span class="text-brand-500 font-bold">0x7F8C409E20</span>
-                        </div>
-                        <div class="p-3 rounded-lg bg-black/40 border border-brand-border flex justify-between items-center">
-                            <span class="text-gray-400">Veri Tipi:</span>
-                            <span class="text-purple-400 font-bold">DWORD (4 Bytes)</span>
-                        </div>
-                        <div class="p-3 rounded-lg bg-black/40 border border-brand-border flex justify-between items-center">
-                            <span class="text-gray-400">Mevcut Değer:</span>
-                            <span class="text-emerald-400 font-bold glowing-value">1,000,000</span>
-                        </div>
-
-                        <!-- Progress Bar -->
-                        <div class="pt-2">
-                            <div class="flex justify-between text-gray-500 text-[10px] mb-1">
-                                <span>RAM Taraması (Region: Anonymous)</span>
-                                <span class="scan-percent">100%</span>
-                            </div>
-                            <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-brand-600 to-brand-500 scan-bar" style="width: 100%"></div>
-                            </div>
+                        <div class="flex items-center gap-2 font-mono text-xs text-cyber-cyan">
+                            <i class="fa-solid fa-shield-halved"></i> ANTI-CHEAT BYPASS ACTIVE
                         </div>
                     </div>
 
-                    <!-- Floating Action Button Mock -->
-                    <div class="absolute -right-5 -bottom-5 w-14 h-14 rounded-full bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center shadow-lg shadow-brand-500/40 border border-white/20 float-icon">
-                        <i class="fa-solid fa-shield-halved text-xl text-white"></i>
+                    <!-- Floating Game Guardian Widget Concept -->
+                    <div class="space-y-4 font-mono">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-cyber-card border border-cyber-border">
+                            <span class="text-xs text-gray-400">Target Address:</span>
+                            <span class="text-sm font-bold text-cyber-cyan">0x7F9B40C110</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-cyber-card border border-cyber-border">
+                            <span class="text-xs text-gray-400">Region:</span>
+                            <span class="text-sm font-bold text-cyber-purple">Cd: Code App (Xa)</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-cyber-card border border-cyber-border">
+                            <span class="text-xs text-gray-400">Value (DWORD):</span>
+                            <span class="text-sm font-bold text-cyber-neon" id="hero-live-val">999,999,999</span>
+                        </div>
+
+                        <!-- 3D Animated Progress / Search Bar -->
+                        <div class="p-4 rounded-xl bg-black/50 border border-cyber-border space-y-2">
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Memory Region Scan Progress</span>
+                                <span class="text-cyber-cyan" id="hero-scan-pct">100%</span>
+                            </div>
+                            <div class="w-full h-3 bg-gray-900 rounded-full overflow-hidden p-0.5 border border-gray-800">
+                                <div id="hero-progress-bar" class="h-full bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple rounded-full w-full shadow-lg shadow-cyber-cyan/50"></div>
+                            </div>
+                        </div>
+
+                        <!-- 3D Mini Interactive Buttons inside Hero Overlay -->
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <button onclick="triggerHeroScan()" class="btn-3d btn-3d-cyan py-3 text-xs">
+                                <i class="fa-solid fa-rotate mr-2"></i> RE-SCAN RAM
+                            </button>
+                            <button onclick="freezeHeroVal()" class="btn-3d btn-3d-emerald py-3 text-xs" id="freeze-btn">
+                                <i class="fa-solid fa-snowflake mr-2"></i> FREEZE VALUE
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Decorative Background Glow Blobs -->
+                <div class="absolute -top-10 -right-10 w-72 h-72 bg-cyber-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-cyber-purple/20 rounded-full blur-3xl pointer-events-none"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LIVE INTERACTIVE SIMULATOR (THE CORE FEATURE) -->
+    <section id="simulator" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="text-center space-y-4 mb-12">
+            <span class="btn-3d btn-3d-dark px-4 py-1.5 text-xs text-cyber-cyan">INTERAKTİF ARAYÜZ</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Game Guardian Canlı Simülatörü</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base font-sans">
+                Aşağıdaki gerçek zamanlı tarayıcı ile bellek araması yapın, değerleri değiştirin, Speedhack hızıyla oynayın veya Lua scriptlerini çalıştırın.
+            </p>
+        </div>
+
+        <!-- THE SIMULATOR HARDWARE FRAME -->
+        <div class="window-3d p-6 sm:p-8 max-w-5xl mx-auto relative overflow-hidden">
+            
+            <!-- Simulator Tabs Header -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-cyber-border">
+                <!-- App/PID Selector -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-cyber-card border border-cyber-border flex items-center justify-center text-cyber-cyan">
+                        <i class="fa-solid fa-gamepad text-lg"></i>
+                    </div>
+                    <div>
+                        <select id="sim-process-select" class="bg-cyber-card text-white font-mono text-xs px-3 py-2 rounded-lg border border-cyber-border outline-none focus:border-cyber-cyan">
+                            <option value="pubg">com.tencent.ig (PUBG Mobile - ARM64)</option>
+                            <option value="brawl">com.supercell.brawlstars (IL2CPP Engine)</option>
+                            <option value="roblox">com.roblox.client (Native C++)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs inside Simulator -->
+                <div class="flex items-center gap-2 bg-cyber-card p-1.5 rounded-xl border border-cyber-border font-mono text-xs">
+                    <button onclick="switchSimTab('search')" id="tab-btn-search" class="px-4 py-2 rounded-lg bg-cyber-cyan text-black font-bold shadow-md transition-all">
+                        <i class="fa-solid fa-magnifying-glass mr-1"></i> ARAMA
+                    </button>
+                    <button onclick="switchSimTab('speed')" id="tab-btn-speed" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all">
+                        <i class="fa-solid fa-gauge-high mr-1"></i> SPEEDHACK
+                    </button>
+                    <button onclick="switchSimTab('hex')" id="tab-btn-hex" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all">
+                        <i class="fa-solid fa-cubes mr-1"></i> HEX DÖKÜM
+                    </button>
+                    <button onclick="switchSimTab('lua')" id="tab-btn-lua" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all">
+                        <i class="fa-solid fa-code mr-1"></i> LUA SCRIPTS
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 1: MEMORY SEARCH & EDIT -->
+            <div id="sim-tab-search" class="pt-6 space-y-6">
+                <!-- Control Panel Inputs -->
+                <div class="grid md:grid-cols-12 gap-4 font-mono">
+                    <div class="md:col-span-5">
+                        <label class="block text-xs text-gray-400 mb-2">ARANACAK DEĞER (EXACT VALUE)</label>
+                        <input type="text" id="sim-search-input" value="1000" class="w-full bg-cyber-card border border-cyber-border rounded-xl px-4 py-3 text-white focus:border-cyber-cyan outline-none text-sm">
+                    </div>
+                    <div class="md:col-span-4">
+                        <label class="block text-xs text-gray-400 mb-2">VERİ TİPİ (DATA TYPE)</label>
+                        <select id="sim-type-select" class="w-full bg-cyber-card border border-cyber-border rounded-xl px-4 py-3 text-white focus:border-cyber-cyan outline-none text-sm">
+                            <option value="dword">D: DWORD (4 Bytes)</option>
+                            <option value="float">F: Float (Single Precision)</option>
+                            <option value="qword">Q: QWORD (8 Bytes)</option>
+                            <option value="xor">X: XOR Encrypted Value</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-3 flex items-end">
+                        <button onclick="runSimSearch()" class="btn-3d btn-3d-cyan w-full py-3 text-xs">
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i> YENİ ARAMA
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Output Table -->
+                <div class="border border-cyber-border rounded-xl overflow-hidden bg-black/40 font-mono text-xs">
+                    <div class="grid grid-cols-12 bg-cyber-card p-3 border-b border-cyber-border text-gray-400 font-bold">
+                        <div class="col-span-4">BELLET ADRESİ (HEX)</div>
+                        <div class="col-span-3">TİP</div>
+                        <div class="col-span-3">MEVCUT DEĞER</div>
+                        <div class="col-span-2 text-right">EYLEM</div>
+                    </div>
+                    <div id="sim-results-list" class="divide-y divide-cyber-border max-h-64 overflow-y-auto">
+                        <!-- Dynamic Results Injected Here via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: SPEEDHACK ENGINE -->
+            <div id="sim-tab-speed" class="pt-6 space-y-6 hidden">
+                <div class="card-3d p-6 rounded-xl text-center space-y-6">
+                    <div class="inline-flex items-center gap-2 text-cyber-cyan font-mono text-sm">
+                        <i class="fa-solid fa-gauge-high text-xl"></i> TIME SCALE CONTROLLER
+                    </div>
+                    
+                    <div class="text-5xl font-extrabold font-mono text-white neon-text-cyan" id="speed-multiplier-display">
+                        1.0x
+                    </div>
+
+                    <!-- 3D Speed Slider -->
+                    <div class="max-w-md mx-auto space-y-2">
+                        <input type="range" id="speed-slider" min="0.1" max="50" step="0.1" value="1.0" oninput="updateSpeedhack(this.value)" class="w-full h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-cyber-cyan">
+                        <div class="flex justify-between text-xs font-mono text-gray-500">
+                            <span>0.1x (Slowmo)</span>
+                            <span>1.0x (Normal)</span>
+                            <span>10.0x</span>
+                            <span>50.0x (Hyper)</span>
+                        </div>
+                    </div>
+
+                    <!-- Speedhack Preset Buttons -->
+                    <div class="flex justify-center gap-3 font-mono">
+                        <button onclick="setSpeedPreset(0.5)" class="btn-3d btn-3d-dark px-4 py-2 text-xs">0.5x</button>
+                        <button onclick="setSpeedPreset(1.0)" class="btn-3d btn-3d-dark px-4 py-2 text-xs">1.0x RESET</button>
+                        <button onclick="setSpeedPreset(5.0)" class="btn-3d btn-3d-purple px-4 py-2 text-xs">5.0x</button>
+                        <button onclick="setSpeedPreset(20.0)" class="btn-3d btn-3d-cyan px-4 py-2 text-xs">20.0x MAX</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: HEX VIEWER -->
+            <div id="sim-tab-hex" class="pt-6 space-y-4 hidden font-mono text-xs">
+                <div class="flex justify-between items-center text-gray-400">
+                    <span>MEMORY REGION: 0x7F8C0000 - 0x7F8C00FF</span>
+                    <button onclick="generateHexDump()" class="btn-3d btn-3d-dark px-3 py-1 text-[10px]">
+                        <i class="fa-solid fa-arrows-rotate mr-1"></i> REFRESH HEX
+                    </button>
+                </div>
+                <div id="hex-view-container" class="bg-black/60 border border-cyber-border p-4 rounded-xl font-mono text-cyber-cyan overflow-x-auto leading-relaxed space-y-1">
+                    <!-- Dynamic Hex Lines Generated Here -->
+                </div>
+            </div>
+
+            <!-- TAB 4: LUA SCRIPT ENGINE -->
+            <div id="sim-tab-lua" class="pt-6 space-y-4 hidden font-mono">
+                <div class="grid md:grid-cols-12 gap-4">
+                    <div class="md:col-span-7">
+                        <label class="block text-xs text-gray-400 mb-2">LUA EDITOR</label>
+                        <textarea id="lua-code-editor" rows="7" class="w-full bg-black/60 border border-cyber-border rounded-xl p-3 text-cyber-neon font-mono text-xs outline-none focus:border-cyber-cyan">
+-- Game Guardian Lua Injection Script
+gg.clearResults()
+gg.searchNumber("1000", gg.TYPE_DWORD)
+gg.getResults(100)
+gg.editAll("999999", gg.TYPE_DWORD)
+gg.toast("Memory Patcher Completed Successfully!")
+                        </textarea>
+                        <button onclick="executeLuaScript()" class="btn-3d btn-3d-emerald w-full py-3 text-xs mt-3">
+                            <i class="fa-solid fa-play mr-2"></i> EXECUTE LUA SCRIPT
+                        </button>
+                    </div>
+                    <div class="md:col-span-5">
+                        <label class="block text-xs text-gray-400 mb-2">CONSOLE LOGS</label>
+                        <div id="lua-console-output" class="bg-black/80 border border-cyber-border rounded-xl p-3 text-gray-300 font-mono text-[11px] h-48 overflow-y-auto space-y-1">
+                            <div class="text-gray-500">[SYSTEM] Lua Engine v5.3 ready.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3D FEATURE GRID SECTION -->
+    <section id="features" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="text-center space-y-4 mb-16">
+            <span class="btn-3d btn-3d-dark px-4 py-1.5 text-xs text-cyber-purple">MİMARİ ÖZELLİKLER</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Neden GG.ENGINE X?</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Feature 1 -->
+            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan text-2xl">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">XOR & Fuzzy Search</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Kriptolanmış veya dinamik değişen bellek değerlerini Fuzzy (Bilinmeyen Değer) tarama algoritmalarıyla saniyeler içinde çözün.
+                </p>
+                <div class="pt-2 text-xs font-mono text-cyber-cyan flex items-center gap-2">
+                    <span>ARM64 DIRECT ACCESS</span> <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-purple/10 border border-cyber-purple/30 flex items-center justify-center text-cyber-purple text-2xl">
+                    <i class="fa-solid fa-ghost"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Stealth Process Hiding</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Anti-cheat sistemlerini atlatmak için rastgele paket isimleri (Randomized Package Name) ve Root Hide teknikleri kullanır.
+                </p>
+                <div class="pt-2 text-xs font-mono text-cyber-purple flex items-center gap-2">
+                    <span>BYPASS SYSTEM</span> <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-neon/10 border border-cyber-neon/30 flex items-center justify-center text-cyber-neon text-2xl">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Pointer Chain Finder</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Statik offset adreslerini bulmak için derinlemesine pointer zinciri taraması gerçekleştirin ve kalıcı yamalar hazırlayın.
+                </p>
+                <div class="pt-2 text-xs font-mono text-cyber-neon flex items-center gap-2">
+                    <span>STATIC POINTERS</span> <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-pink/10 border border-cyber-pink/30 flex items-center justify-center text-cyber-pink text-2xl">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Speedhack Engine</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    C++ seviyesinde sistem saatlerini manipüle ederek oyun içi animasyonları, soğuma sürelerini ve hareket hızını ayarlayın.
+                </p>
+                <div class="pt-2 text-xs font-mono text-cyber-pink flex items-center gap-2">
+                    <span>TIME MANIPULATION</span> <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-amber/10 border border-cyber-amber/30 flex items-center justify-center text-cyber-amber text-2xl">
+                    <i class="fa-solid fa-code-merge"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">Lua 5.3 Scripting</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Karmaşık bellek düzenleme adımlarını tek tıkla çalıştırılabilen otomatize menülere ve özel mod scriptlerine dönüştürün.
+                </p>
+                <div class="pt-2 text-xs font-mono text-cyber-amber flex items-center gap-2">
+                    <span>AUTOMATION ENGINE</span> <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
+                <div class="w-14 h-14 rounded-2xl bg-cyber-blue/10 border border-cyber-blue/30 flex items-center justify-center text-cyber-blue text-2xl">
+                    <i class="fa-solid fa-[#00f2fe] fa-display"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white">3D Floating Overlay</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Oyun oynarken ekranın üstünde yüzen dokunsal ve saydamlaştırılabilir 3D kontrol arayüzü ile kesintisiz erişim sağlayın.
+                </p>
+                <div class="pt-2 text-xs font-mono text-cyber-blue flex items-center gap-2">
+                    <span>FLOATING WINDOW</span> <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DOWNLOAD SECTION WITH 3D BUTTONS -->
+    <section id="download" class="py-20 px-4 sm:px-8 max-w-5xl mx-auto">
+        <div class="card-3d rounded-3xl p-8 sm:p-12 text-center space-y-8 relative overflow-hidden border-2 border-cyber-cyan/30">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyber-cyan/20 text-cyber-cyan font-mono text-xs">
+                <i class="fa-solid fa-download"></i> RESMİ APK SÜRÜMÜ
+            </div>
+
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white">
+                GG.ENGINE X'i Hemen Edinin
+            </h2>
+
+            <p class="text-gray-300 max-w-xl mx-auto text-sm sm:text-base font-sans">
+                Android 5.0 ve üstü tüm cihazlarla uyumludur. Virtual Master, VPhoneGAGA veya Root'lu cihazlarda sorunsuz çalışır.
+            </p>
+
+            <!-- Big 3D Download CTA -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 pt-4">
+                <a href="#" onclick="alert('İndirme Başlatıldı: GG_Engine_v10.4_Official.apk')" class="btn-3d btn-3d-cyan px-10 py-5 text-base w-full sm:w-auto">
+                    <i class="fa-solid fa-download mr-3 text-xl"></i> INDIR (OFFICIAL APK)
+                </a>
+                <a href="#" onclick="alert('İndirme Başlatıldı: GG_Engine_NoRoot_Space.apk')" class="btn-3d btn-3d-purple px-10 py-5 text-base w-full sm:w-auto">
+                    <i class="fa-solid fa-box-archive mr-3 text-xl"></i> NO-ROOT VIRTUAL APK
+                </a>
+            </div>
+
+            <!-- Hash Hashes -->
+            <div class="pt-8 border-t border-cyber-border font-mono text-xs text-gray-400 space-y-1">
+                <div>MD5: <span class="text-cyber-cyan">e8f921a4b2c19382f019a2e84700b1d2</span></div>
+                <div>SHA-256: <span class="text-cyber-purple">8f92a104b2c83d91720d291f02c9182736182937402019283a00918273641293</span></div>
             </div>
         </div>
     </section>
 
-    <!-- ÖZELLİKLER SEKTÖRÜ -->
-    <section id="features" class="py-24 px-6 max-w-7xl mx-auto z-10 relative">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500 mb-3">Gelişmiş Donanım</h2>
-            <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Sınırsız Özelleştirme ve Müdahale</h3>
+    <!-- FOOTER -->
+    <footer class="border-t border-cyber-border py-12 px-4 sm:px-8 bg-black/60 font-mono text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-cyber-cyan/20 flex items-center justify-center text-cyber-cyan font-bold">
+                    GG
+                </div>
+                <span>© 2026 GG.ENGINE LABORATORY. ALL RIGHTS RESERVED.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-cyber-cyan transition-colors">PRIVACY POLICY</a>
+                <a href="#" class="hover:text-cyber-cyan transition-colors">TERMS OF SERVICE</a>
+                <a href="#" class="hover:text-cyber-cyan transition-colors">DOCUMENTATION</a>
+            </div>
         </div>
+    </footer>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Feature 1 -->
-            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-xl mb-6 border border-brand-500/20">
-                    <i class="fa-solid fa-magnifying-glass font-mono"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white mb-3">Çoklu Bellek Taraması</h4>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    DWORD, Float, QWORD, XOR korumalı değerler ve Otomatik Veri Tipi tespiti ile mili-saniyeler içinde RAM analizi.
-                </p>
-            </div>
+    <!-- JAVASCRIPT & ANIME.JS LOGIC -->
+    <script>
+        // --- 1. HERO TILT EFFECT WITH ANIME.JS / JS ---
+        const tiltCard = document.getElementById('hero-tilt-card');
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+            
+            const rotateX = ((clientY / innerHeight) - 0.5) * -20;
+            const rotateY = ((clientX / innerWidth) - 0.5) * 20;
 
-            <!-- Feature 2 -->
-            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
-                <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-6 border border-purple-500/20">
-                    <i class="fa-solid fa-gauge-high"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white mb-3">Gelişmiş Speedhack</h4>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Oyun içi zaman akışını (Timers & ClockTicks) yavaşlatın veya 1000x kata kadar hızlandırın. Hem x86 hem ARM destekli.
-                </p>
-            </div>
+            if (tiltCard) {
+                tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            }
+        });
 
-            <!-- Feature 3 -->
-            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-6 border border-emerald-500/20">
-                    <i class="fa-solid fa-code"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white mb-3">Lua Script Motoru</h4>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Kendi otomatik arama ve düzenleme scriptlerinizi yazın. Karmaşık bellek işlemleri için tek tıkla çalışan hazır menüler oluşturun.
-                </p>
-            </div>
+        // --- 2. STATS COUNTER WITH ANIME.JS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.stat-counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                anime({
+                    targets: counter,
+                    innerHTML: [0, target],
+                    easing: 'easeOutExpo',
+                    round: 1,
+                    duration: 2500,
+                    formatter: (val) => {
+                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                });
+            });
 
-            <!-- Feature 4 -->
-            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
-                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-6 border border-amber-500/20">
-                    <i class="fa-solid fa-user-ninja"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white mb-3">Stealth / Anti-Detection</h4>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Rastgele paket adı (Random Package Name) oluşturucu ve sistem çağrılarını gizleyen korumalı sanallaştırma katmanı.
-                </p>
-            </div>
+            // Initialize simulator results
+            runSimSearch();
+            generateHexDump();
+        });
 
-            <!-- Feature 5 -->
-            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
-                <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl mb-6 border border-rose-500/20">
-                    <i class="fa-solid fa-link"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white mb-3">Pointer Finder</h4>
-                <p class="text-gray-400 text-sm
+        // --- 3. HERO INTERACTIVE WIDGET FUNCTIONS ---
+        let isHeroFrozen = false;
+        function triggerHeroScan() {
+            const progressBar = document.getElementById('hero-progress-bar');
+            const pctText = document.getElementById('hero-scan-pct');
+            const liveVal = document.getElementById('hero-live-val');
+
+            anime({
+                targets: progressBar,
+                width: ['0%', '100%'],
+                duration: 1200,
+                easing: 'easeInOutQuad',
+                update: function(anim) {
+                    pctText.innerText = Math.round(anim.progress) + '%';
+                },
+                complete: function() {
+                    liveVal.innerText = Math.floor(Math.random() * 899999999 + 100000000).toLocaleString();
+                }
+            });
+        }
+
+        function freezeHeroVal() {
+            const btn = document.getElementById('freeze-btn');
+            const liveVal = document.getElementById('hero-live-val');
+            isHeroFrozen = !isHeroFrozen;
+
+            if(isHeroFrozen) {
+                btn.classList.remove('btn-3d-emerald');
+                btn.classList.add('btn-3d-purple');
+                btn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i> FROZEN';
+                liveVal.classList.add('neon-text-pink');
+            } else {
+                btn.classList.remove('btn-3d-purple');
+                btn.classList.add('btn-3d-emerald');
+                btn.innerHTML = '<i class="fa-solid fa-snowflake mr-2"></i> FREEZE VALUE';
+                liveVal.classList.remove('neon-text-pink');
+            }
+        }
+
+        // --- 4. SIMULATOR TAB SWITCHING ---
+        function switchSimTab(tabName) {
+            const tabs = ['search', 'speed', 'hex', 'lua'];
+            tabs.forEach(t => {
+                document.getElementById(`sim-tab-${t}`).classList.add('hidden');
+                const btn = document.getElementById(`tab-btn-${t}`);
+                btn.className = "px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all";
+            });
+
+            document.getElementById(`sim-tab-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+            activeBtn.className = "px-4 py-2 rounded-lg bg-cyber-cyan text-black font-bold shadow-md transition-all";
+        }
+
+        // --- 5. SIMULATOR SEARCH ENGINE SIMULATION ---
+        function runSimSearch() {
+            const valInput = document.getElementById('sim-search-input').value || "1000";
+            const typeInput = document.getElementById('sim-type-select').value.toUpperCase();
+            const resultsContainer = document.getElementById('sim-results-list');
+
+            resultsContainer.innerHTML = '';
+
+            // Generate 4 fake memory addresses
+            for (let i = 0; i < 4; i++) {
+                const randomAddr = '0x7F' + Math.floor(Math.random()*16777215).toString(16).toUpperCase();
+                const row = document.createElement('div');
+                row.className = "grid grid-cols-12 p-3 items-center hover:bg-cyber-card/60 transition-colors";
+                row.innerHTML = `
+                    <div class="col-span-4 font-bold text-cyber-cyan">${randomAddr}</div>
+                    <div class="col-span-3 text-gray-400">${typeInput}</div>
+                    <div class="col-span-3 font-bold text-cyber-neon sim-val-cell">${valInput}</div>
+                    <div class="col-span-2 text-right">
+                        <button onclick="editSimRow(this)" class="btn-3d btn-3d-dark px-2 py-1 text-[10px]">
+                            <i class="fa-solid fa-pen"></i> DÜZENLE
+                        </button>
+                    </div>
+                `;
+                resultsContainer.appendChild(row);
+            }
+
+            anime({
+                targets: '#sim-results-list div',
+                opacity: [0, 1],
+                translateY: [10, 0],
+                delay: anime.stagger(80)
+            });
+        }
+
+        function editSimRow(btn) {
+            const valCell = btn.parentElement.parentElement.querySelector('.sim-val-cell');
+            const newVal = prompt("Yeni Değeri Girin:", "999999");
+            if (newVal !== null) {
+                valCell.innerText = newVal;
+                anime({
+                    targets: valCell,
+                    scale: [1.3, 1],
+                    color: ['#ff007f', '#39ff14'],
+                    duration: 600
+                });
+            }
+        }
+
+        // --- 6. SPEEDHACK ENGINE ---
+        function updateSpeedhack(val) {
+            document.getElementById('speed-multiplier-display').innerText = parseFloat(val).toFixed(1) + 'x';
+        }
+
+        function setSpeedPreset(val) {
+            document.getElementById('speed-slider').value = val;
+            updateSpeedhack(val);
+            anime({
+                targets: '#speed-multiplier-display',
+                scale: [1.2, 1],
+                duration: 300
+            });
+        }
+
+        // --- 7. HEX DUMP GENERATOR ---
+        function generateHexDump() {
+            const container = document.getElementById('hex-view-container');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 8; i++) {
+                const addr = '0x7F8C00' + (i * 16).toString(16).toUpperCase().padStart(2, '0');
+                let hexBytes = '';
+                let asciiStr = '';
+
+                for (let j = 0; j < 16; j++) {
+                    const byteVal = Math.floor(Math.random() * 255);
+                    hexBytes += byteVal.toString(16).toUpperCase().padStart(2, '0') + ' ';
+                    asciiStr += (byteVal > 31 && byteVal < 127) ? String.fromCharCode(byteVal) : '.';
+                }
+
+                const line = document.createElement('div');
+                line.className = "flex justify-between gap-4 font-mono";
+                line.innerHTML = `
+                    <span class="text-gray-500">${addr}</span>
+                    <span class="text-cyber-cyan">${hexBytes}</span>
+                    <span class="text-gray-400">|${asciiStr}|</span>
+                `;
+                container.appendChild(line);
+            }
+        }
+
+        // --- 8. LUA SCRIPT EXECUTION SIMULATOR ---
+        function executeLuaScript() {
+            const consoleBox = document.getElementById('lua-console-output');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const logs = [
+                `[${timestamp}] Executing Lua script...`,
+                `[${timestamp}] gg.clearResults() -> Cleared 0 items.`,
+                `[${timestamp}] gg.searchNumber() -> Found 1,420 addresses.`,
+                `[${timestamp}] gg.editAll() -> Replaced 1,420 values to 999999.`,
+                `[${timestamp}] SUCCESS: Memory Injection Executed!`
+            ];
+
+            logs.forEach((log, index) => {
+                setTimeout(() => {
+                    const line = document.createElement('div');
+                    line.className = index === logs.length - 1 ? "text-cyber-neon font-bold" : "text-gray-300";
+                    line.innerText = log;
+                    consoleBox.appendChild(line);
+                    consoleBox.scrollTop = consoleBox.scrollHeight;
+                }, index * 300);
+            });
+        }
+    </script>
+</body>
+</html>
