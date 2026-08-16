@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GG.ENGINE X - 3D Android Memory Engine & Hex Modifier</title>
+    <title>Metich Rays - Android Memory Engine & Hex Modifier</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -150,27 +150,6 @@
             box-shadow: 0 1px 0 #020617, 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
-        /* 3D Neon Emerald Button */
-        .btn-3d-emerald {
-            background: linear-gradient(180deg, #10b981 0%, #047857 100%);
-            color: #022c22;
-            border: 1px solid #6ee7b7;
-            box-shadow: 
-                0 6px 0 #064e3b,
-                0 12px 20px rgba(16, 185, 129, 0.4),
-                inset 0 2px 0 rgba(255, 255, 255, 0.5);
-            transform: translateY(-3px);
-        }
-        .btn-3d-emerald:hover {
-            background: linear-gradient(180deg, #34d399 0%, #065f46 100%);
-            box-shadow: 0 8px 0 #022c22, 0 16px 25px rgba(16, 185, 129, 0.6);
-            transform: translateY(-5px);
-        }
-        .btn-3d-emerald:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #022c22, 0 3px 8px rgba(16, 185, 129, 0.3);
-        }
-
         /* 3D CARDS & PANELS */
         .card-3d {
             background: linear-gradient(135deg, rgba(19, 27, 46, 0.8) 0%, rgba(13, 19, 34, 0.9) 100%);
@@ -193,7 +172,6 @@
                 inset 0 0 20px rgba(0, 242, 254, 0.1);
         }
 
-        /* 3D FLOATING HARDWARE CONTAINER */
         .window-3d {
             background: #090e1a;
             border-radius: 20px;
@@ -205,14 +183,11 @@
             transform-style: preserve-3d;
         }
 
-        /* GLOW & EFFECTS */
+        /* GLOWS */
         .neon-text-cyan {
             text-shadow: 0 0 10px rgba(0, 242, 254, 0.6), 0 0 20px rgba(0, 242, 254, 0.3);
         }
-        .neon-text-pink {
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.3);
-        }
-        
+
         .scanline {
             background: linear-gradient(
                 to bottom,
@@ -224,10 +199,8 @@
             background-size: 100% 4px;
         }
 
-        /* CUSTOM SCROLLBAR */
         ::-webkit-scrollbar {
             width: 8px;
-            height: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #05070f;
@@ -235,7 +208,6 @@
         ::-webkit-scrollbar-thumb {
             background: #1e293b;
             border-radius: 4px;
-            border: 1px solid #334155;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #00f2fe;
@@ -249,146 +221,138 @@
         <div class="max-w-7xl mx-auto card-3d rounded-2xl px-6 py-3 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyber-cyan to-cyber-purple flex items-center justify-center shadow-lg shadow-cyber-cyan/30 transform rotate-3 hover:rotate-0 transition-transform">
-                    <i class="fa-solid fa-microchip text-2xl text-black"></i>
+                    <i class="fa-solid fa-bolt text-2xl text-black"></i>
                 </div>
                 <div>
                     <span class="font-mono font-extrabold text-xl tracking-wider text-white flex items-center gap-2">
-                        GG.ENGINE <span class="text-xs px-2 py-0.5 rounded bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40">PRO v10.4</span>
+                        METICH RAYS <span class="text-xs px-2 py-0.5 rounded bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40">PRO v12.0</span>
                     </span>
-                    <p class="text-[10px] font-mono text-gray-400">ANDROID MEMORY INJECTOR & SPEEDHACK</p>
+                    <p class="text-[10px] font-mono text-gray-400">ANDROID MEMORY ENGINE & OVERLAY</p>
                 </div>
             </div>
 
             <!-- Nav Links -->
             <div class="hidden lg:flex items-center gap-8 font-mono text-sm">
-                <a href="#simulator" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-terminal text-xs text-cyber-cyan"></i> Simülatör
+                <a href="#games" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-gamepad text-xs text-cyber-cyan"></i> <span data-i18n="nav_games">Desteklenen Oyunlar</span>
                 </a>
                 <a href="#features" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-xs text-cyber-purple"></i> Özellikler
-                </a>
-                <a href="#hexview" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-code text-xs text-cyber-neon"></i> Hex Düzenleyici
+                    <i class="fa-solid fa-layer-group text-xs text-cyber-purple"></i> <span data-i18n="nav_features">Özellikler</span>
                 </a>
                 <a href="#download" class="text-gray-300 hover:text-cyber-cyan transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-download text-xs text-cyber-pink"></i> İndir
+                    <i class="fa-solid fa-download text-xs text-cyber-pink"></i> <span data-i18n="nav_download">İndir</span>
                 </a>
             </div>
 
-            <!-- Top CTA Button -->
-            <div class="flex items-center gap-3">
-                <a href="#simulator" class="btn-3d btn-3d-cyan px-5 py-2.5 text-xs">
-                    <i class="fa-solid fa-play mr-2"></i> CANLI ARAYÜZ
+            <!-- Language Switcher & Top CTA -->
+            <div class="flex items-center gap-4">
+                <!-- 3D Language Dropdown -->
+                <div class="relative inline-block text-left">
+                    <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-cyber-card text-cyber-cyan font-mono text-xs px-3 py-2 rounded-xl border border-cyber-cyan/40 outline-none cursor-pointer hover:border-cyber-cyan transition-all">
+                        <option value="tr">🇹🇷 TR</option>
+                        <option value="en">🇬🇧 EN</option>
+                        <option value="ru">🇷🇺 RU</option>
+                    </select>
+                </div>
+
+                <a href="#download" class="btn-3d btn-3d-cyan px-5 py-2.5 text-xs">
+                    <i class="fa-solid fa-download mr-2"></i> <span data-i18n="btn_get_apk">APK İNDİR</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION WITH 3D PERSPECTIVE TILT -->
+    <!-- HERO SECTION -->
     <section class="relative pt-36 pb-20 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden">
         <div class="grid lg:grid-cols-12 gap-12 items-center">
             
-            <!-- Left Column: Text & 3D CTAs -->
+            <!-- Left Column -->
             <div class="lg:col-span-6 space-y-8">
                 <div class="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-cyber-card border border-cyber-cyan/30 text-cyber-cyan font-mono text-xs shadow-lg">
                     <span class="w-2.5 h-2.5 rounded-full bg-cyber-neon animate-ping"></span>
-                    <span>NO-ROOT & ROOT DOKUNSAL DÜZENLEYİCİ</span>
+                    <span data-i18n="hero_badge">ANDROID 15+ & ARM64 SUPPORTED</span>
                 </div>
 
                 <h1 class="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
-                    Bellek Offsetlerini <br>
+                    <span data-i18n="hero_title_1">Mobil Oyunları</span> <br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple neon-text-cyan">
-                        3D Hassasiyetle
+                        Metich Rays
                     </span> <br>
-                    Yönetin.
+                    <span data-i18n="hero_title_2">İle Yönetin.</span>
                 </h1>
 
-                <p class="text-gray-400 font-sans text-base sm:text-lg leading-relaxed">
-                    Android platformundaki IL2CPP, Native C++ ve Java bellek alanlarını gerçek zamanlı tarayın, dword/float değerlerini dondurun, Lua scriptleri çalıştırın ve hız hilesi yapın.
+                <p class="text-gray-400 font-sans text-base sm:text-lg leading-relaxed" data-i18n="hero_desc">
+                    Metich Rays; Android cihazlarınızda bellek adreslerini (RAM), float/dword değerlerini, offsetleri ve hız ayarlarını yüzen 3D menü üzerinden anlık olarak düzenlemenizi sağlar.
                 </p>
 
                 <!-- 3D Button Group -->
                 <div class="flex flex-wrap gap-5 pt-2">
                     <a href="#download" class="btn-3d btn-3d-cyan px-8 py-4 text-sm">
-                        <i class="fa-solid fa-download mr-3 text-lg"></i> GG ENGINE APK İNDİR
+                        <i class="fa-solid fa-download mr-3 text-lg"></i> <span data-i18n="btn_download_now">METICH RAYS İNDİR</span>
                     </a>
-                    <a href="#simulator" class="btn-3d btn-3d-purple px-8 py-4 text-sm">
-                        <i class="fa-solid fa-flask mr-3 text-lg"></i> SIMÜLATÖRÜ AÇ
+                    <a href="#games" class="btn-3d btn-3d-purple px-8 py-4 text-sm">
+                        <i class="fa-solid fa-gamepad mr-3 text-lg"></i> <span data-i18n="btn_view_games">OYUNLARI İNCELE</span>
                     </a>
                 </div>
 
                 <!-- Stats Bar -->
                 <div class="grid grid-cols-3 gap-4 pt-6 border-t border-cyber-border font-mono">
                     <div class="card-3d p-4 rounded-xl text-center">
-                        <div class="text-2xl font-black text-cyber-cyan stat-counter" data-target="2400000">0</div>
-                        <div class="text-[10px] text-gray-400 mt-1">İNDİRME</div>
+                        <div class="text-2xl font-black text-cyber-cyan stat-counter" data-target="3500000">0</div>
+                        <div class="text-[10px] text-gray-400 mt-1" data-i18n="stat_downloads">İNDİRME</div>
                     </div>
                     <div class="card-3d p-4 rounded-xl text-center">
-                        <div class="text-2xl font-black text-cyber-purple">ARM64-v8a</div>
-                        <div class="text-[10px] text-gray-400 mt-1">MİMARİ</div>
+                        <div class="text-2xl font-black text-cyber-purple">ARM64 / x86</div>
+                        <div class="text-[10px] text-gray-400 mt-1" data-i18n="stat_arch">MİMARİ</div>
                     </div>
                     <div class="card-3d p-4 rounded-xl text-center">
-                        <div class="text-2xl font-black text-cyber-neon">&lt; 1ms</div>
-                        <div class="text-[10px] text-gray-400 mt-1">RAM TARAMA</div>
+                        <div class="text-2xl font-black text-cyber-neon">100%</div>
+                        <div class="text-[10px] text-gray-400 mt-1" data-i18n="stat_stealth">GİZLİLİK</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Interactive 3D Floating Window Graphic -->
+            <!-- Right Column: Metich Rays Floating Widget Preview -->
             <div class="lg:col-span-6 relative perspective-1000">
                 <div id="hero-tilt-card" class="window-3d p-6 relative z-10 transition-transform duration-100 ease-out">
-                    <!-- Window Header -->
                     <div class="flex items-center justify-between pb-4 border-b border-cyber-border mb-6">
                         <div class="flex items-center gap-3">
                             <span class="w-3.5 h-3.5 rounded-full bg-red-500 shadow-md shadow-red-500/50"></span>
                             <span class="w-3.5 h-3.5 rounded-full bg-amber-500 shadow-md shadow-amber-500/50"></span>
                             <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 shadow-md shadow-emerald-500/50"></span>
-                            <span class="font-mono text-xs text-gray-400 ml-2">com.pubg.kng (PID: 14209)</span>
+                            <span class="font-mono text-xs text-gray-400 ml-2">MetichRays_Overlay.so (Active)</span>
                         </div>
                         <div class="flex items-center gap-2 font-mono text-xs text-cyber-cyan">
-                            <i class="fa-solid fa-shield-halved"></i> ANTI-CHEAT BYPASS ACTIVE
+                            <i class="fa-solid fa-shield-halved"></i> SAFE ENGINE
                         </div>
                     </div>
 
-                    <!-- Floating Game Guardian Widget Concept -->
                     <div class="space-y-4 font-mono">
                         <div class="flex items-center justify-between p-3 rounded-xl bg-cyber-card border border-cyber-border">
-                            <span class="text-xs text-gray-400">Target Address:</span>
-                            <span class="text-sm font-bold text-cyber-cyan">0x7F9B40C110</span>
+                            <span class="text-xs text-gray-400">Engine Mode:</span>
+                            <span class="text-sm font-bold text-cyber-cyan">Native C++ Injector</span>
                         </div>
                         <div class="flex items-center justify-between p-3 rounded-xl bg-cyber-card border border-cyber-border">
-                            <span class="text-xs text-gray-400">Region:</span>
-                            <span class="text-sm font-bold text-cyber-purple">Cd: Code App (Xa)</span>
+                            <span class="text-xs text-gray-400">Hook Target:</span>
+                            <span class="text-sm font-bold text-cyber-purple">libil2cpp.so</span>
                         </div>
                         <div class="flex items-center justify-between p-3 rounded-xl bg-cyber-card border border-cyber-border">
-                            <span class="text-xs text-gray-400">Value (DWORD):</span>
-                            <span class="text-sm font-bold text-cyber-neon" id="hero-live-val">999,999,999</span>
+                            <span class="text-xs text-gray-400">Memory Offset:</span>
+                            <span class="text-sm font-bold text-cyber-neon">0x02B491F0</span>
                         </div>
 
-                        <!-- 3D Animated Progress / Search Bar -->
                         <div class="p-4 rounded-xl bg-black/50 border border-cyber-border space-y-2">
                             <div class="flex justify-between text-xs text-gray-400">
-                                <span>Memory Region Scan Progress</span>
-                                <span class="text-cyber-cyan" id="hero-scan-pct">100%</span>
+                                <span>Inject Progress</span>
+                                <span class="text-cyber-cyan">100% SUCCESS</span>
                             </div>
                             <div class="w-full h-3 bg-gray-900 rounded-full overflow-hidden p-0.5 border border-gray-800">
-                                <div id="hero-progress-bar" class="h-full bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple rounded-full w-full shadow-lg shadow-cyber-cyan/50"></div>
+                                <div class="h-full bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-purple rounded-full w-full shadow-lg shadow-cyber-cyan/50"></div>
                             </div>
-                        </div>
-
-                        <!-- 3D Mini Interactive Buttons inside Hero Overlay -->
-                        <div class="grid grid-cols-2 gap-3 pt-2">
-                            <button onclick="triggerHeroScan()" class="btn-3d btn-3d-cyan py-3 text-xs">
-                                <i class="fa-solid fa-rotate mr-2"></i> RE-SCAN RAM
-                            </button>
-                            <button onclick="freezeHeroVal()" class="btn-3d btn-3d-emerald py-3 text-xs" id="freeze-btn">
-                                <i class="fa-solid fa-snowflake mr-2"></i> FREEZE VALUE
-                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Decorative Background Glow Blobs -->
                 <div class="absolute -top-10 -right-10 w-72 h-72 bg-cyber-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-cyber-purple/20 rounded-full blur-3xl pointer-events-none"></div>
             </div>
@@ -396,158 +360,208 @@
         </div>
     </section>
 
-    <!-- LIVE INTERACTIVE SIMULATOR (THE CORE FEATURE) -->
-    <section id="simulator" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+    <!-- SUPPORTED GAMES SECTION (DESTEKLENEN OYUNLAR) -->
+    <section id="games" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
         <div class="text-center space-y-4 mb-12">
-            <span class="btn-3d btn-3d-dark px-4 py-1.5 text-xs text-cyber-cyan">INTERAKTİF ARAYÜZ</span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Game Guardian Canlı Simülatörü</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base font-sans">
-                Aşağıdaki gerçek zamanlı tarayıcı ile bellek araması yapın, değerleri değiştirin, Speedhack hızıyla oynayın veya Lua scriptlerini çalıştırın.
+            <span class="btn-3d btn-3d-dark px-4 py-1.5 text-xs text-cyber-cyan" data-i18n="tag_supported">UYUMLULUK LİSTESİ</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white" data-i18n="title_supported_games">Desteklenen Popüler Oyunlar</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base font-sans" data-i18n="desc_supported_games">
+                Metich Rays motoru, aşağıdaki mobil oyunlar başta olmak üzere tüm Unity (IL2CPP), Unreal Engine ve Native C++ altyapılı oyunlarda bellek ve offset düzenlemelerini destekler.
             </p>
         </div>
 
-        <!-- THE SIMULATOR HARDWARE FRAME -->
-        <div class="window-3d p-6 sm:p-8 max-w-5xl mx-auto relative overflow-hidden">
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 font-mono text-xs">
+            <button onclick="filterGames('all')" class="btn-3d btn-3d-cyan px-4 py-2 filter-btn active" data-filter="all" data-i18n="cat_all">HEPSİ</button>
+            <button onclick="filterGames('action')" class="btn-3d btn-3d-dark px-4 py-2 filter-btn" data-filter="action" data-i18n="cat_action">AKSİYON / FPS</button>
+            <button onclick="filterGames('br')" class="btn-3d btn-3d-dark px-4 py-2 filter-btn" data-filter="br">BATTLE ROYALE</button>
+            <button onclick="filterGames('moba')" class="btn-3d btn-3d-dark px-4 py-2 filter-btn" data-filter="moba">MOBA & ARENA</button>
+            <button onclick="filterGames('casual')" class="btn-3d btn-3d-dark px-4 py-2 filter-btn" data-filter="casual">SIMÜLASYON & ARCADE</button>
+        </div>
+
+        <!-- Games 3D Grid -->
+        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             
-            <!-- Simulator Tabs Header -->
-            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-cyber-border">
-                <!-- App/PID Selector -->
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-cyber-card border border-cyber-border flex items-center justify-center text-cyber-cyan">
-                        <i class="fa-solid fa-gamepad text-lg"></i>
+            <!-- Game 1 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="br">
+                <div class="flex items-center justify-between">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-red-600 flex items-center justify-center text-white text-2xl shadow-lg">
+                        <i class="fa-solid fa-crosshairs"></i>
                     </div>
-                    <div>
-                        <select id="sim-process-select" class="bg-cyber-card text-white font-mono text-xs px-3 py-2 rounded-lg border border-cyber-border outline-none focus:border-cyber-cyan">
-                            <option value="pubg">com.tencent.ig (PUBG Mobile - ARM64)</option>
-                            <option value="brawl">com.supercell.brawlstars (IL2CPP Engine)</option>
-                            <option value="roblox">com.roblox.client (Native C++)</option>
-                        </select>
-                    </div>
+                    <span class="text-[10px] font-mono px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">ONLINE</span>
                 </div>
-
-                <!-- Navigation Tabs inside Simulator -->
-                <div class="flex items-center gap-2 bg-cyber-card p-1.5 rounded-xl border border-cyber-border font-mono text-xs">
-                    <button onclick="switchSimTab('search')" id="tab-btn-search" class="px-4 py-2 rounded-lg bg-cyber-cyan text-black font-bold shadow-md transition-all">
-                        <i class="fa-solid fa-magnifying-glass mr-1"></i> ARAMA
-                    </button>
-                    <button onclick="switchSimTab('speed')" id="tab-btn-speed" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all">
-                        <i class="fa-solid fa-gauge-high mr-1"></i> SPEEDHACK
-                    </button>
-                    <button onclick="switchSimTab('hex')" id="tab-btn-hex" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all">
-                        <i class="fa-solid fa-cubes mr-1"></i> HEX DÖKÜM
-                    </button>
-                    <button onclick="switchSimTab('lua')" id="tab-btn-lua" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all">
-                        <i class="fa-solid fa-code mr-1"></i> LUA SCRIPTS
-                    </button>
+                <div>
+                    <h3 class="text-lg font-bold text-white">PUBG Mobile</h3>
+                    <p class="text-xs text-gray-400 font-mono">Unreal Engine 4</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-cyan">
+                    <span>Memory Bypass</span>
+                    <span>v3.2+</span>
                 </div>
             </div>
 
-            <!-- TAB 1: MEMORY SEARCH & EDIT -->
-            <div id="sim-tab-search" class="pt-6 space-y-6">
-                <!-- Control Panel Inputs -->
-                <div class="grid md:grid-cols-12 gap-4 font-mono">
-                    <div class="md:col-span-5">
-                        <label class="block text-xs text-gray-400 mb-2">ARANACAK DEĞER (EXACT VALUE)</label>
-                        <input type="text" id="sim-search-input" value="1000" class="w-full bg-cyber-card border border-cyber-border rounded-xl px-4 py-3 text-white focus:border-cyber-cyan outline-none text-sm">
-                    </div>
-                    <div class="md:col-span-4">
-                        <label class="block text-xs text-gray-400 mb-2">VERİ TİPİ (DATA TYPE)</label>
-                        <select id="sim-type-select" class="w-full bg-cyber-card border border-cyber-border rounded-xl px-4 py-3 text-white focus:border-cyber-cyan outline-none text-sm">
-                            <option value="dword">D: DWORD (4 Bytes)</option>
-                            <option value="float">F: Float (Single Precision)</option>
-                            <option value="qword">Q: QWORD (8 Bytes)</option>
-                            <option value="xor">X: XOR Encrypted Value</option>
-                        </select>
-                    </div>
-                    <div class="md:col-span-3 flex items-end">
-                        <button onclick="runSimSearch()" class="btn-3d btn-3d-cyan w-full py-3 text-xs">
-                            <i class="fa-solid fa-magnifying-glass mr-2"></i> YENİ ARAMA
-                        </button>
-                    </div>
+            <!-- Game 2 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="moba">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-yellow-400 to-amber-600 flex items-center justify-center text-black text-2xl shadow-lg">
+                    <i class="fa-solid fa-skull-crossbones"></i>
                 </div>
-
-                <!-- Results Output Table -->
-                <div class="border border-cyber-border rounded-xl overflow-hidden bg-black/40 font-mono text-xs">
-                    <div class="grid grid-cols-12 bg-cyber-card p-3 border-b border-cyber-border text-gray-400 font-bold">
-                        <div class="col-span-4">BELLET ADRESİ (HEX)</div>
-                        <div class="col-span-3">TİP</div>
-                        <div class="col-span-3">MEVCUT DEĞER</div>
-                        <div class="col-span-2 text-right">EYLEM</div>
-                    </div>
-                    <div id="sim-results-list" class="divide-y divide-cyber-border max-h-64 overflow-y-auto">
-                        <!-- Dynamic Results Injected Here via JS -->
-                    </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Brawl Stars</h3>
+                    <p class="text-xs text-gray-400 font-mono">Supercell Engine</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-purple">
+                    <span>Private & Live</span>
+                    <span>v55+</span>
                 </div>
             </div>
 
-            <!-- TAB 2: SPEEDHACK ENGINE -->
-            <div id="sim-tab-speed" class="pt-6 space-y-6 hidden">
-                <div class="card-3d p-6 rounded-xl text-center space-y-6">
-                    <div class="inline-flex items-center gap-2 text-cyber-cyan font-mono text-sm">
-                        <i class="fa-solid fa-gauge-high text-xl"></i> TIME SCALE CONTROLLER
-                    </div>
-                    
-                    <div class="text-5xl font-extrabold font-mono text-white neon-text-cyan" id="speed-multiplier-display">
-                        1.0x
-                    </div>
-
-                    <!-- 3D Speed Slider -->
-                    <div class="max-w-md mx-auto space-y-2">
-                        <input type="range" id="speed-slider" min="0.1" max="50" step="0.1" value="1.0" oninput="updateSpeedhack(this.value)" class="w-full h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-cyber-cyan">
-                        <div class="flex justify-between text-xs font-mono text-gray-500">
-                            <span>0.1x (Slowmo)</span>
-                            <span>1.0x (Normal)</span>
-                            <span>10.0x</span>
-                            <span>50.0x (Hyper)</span>
-                        </div>
-                    </div>
-
-                    <!-- Speedhack Preset Buttons -->
-                    <div class="flex justify-center gap-3 font-mono">
-                        <button onclick="setSpeedPreset(0.5)" class="btn-3d btn-3d-dark px-4 py-2 text-xs">0.5x</button>
-                        <button onclick="setSpeedPreset(1.0)" class="btn-3d btn-3d-dark px-4 py-2 text-xs">1.0x RESET</button>
-                        <button onclick="setSpeedPreset(5.0)" class="btn-3d btn-3d-purple px-4 py-2 text-xs">5.0x</button>
-                        <button onclick="setSpeedPreset(20.0)" class="btn-3d btn-3d-cyan px-4 py-2 text-xs">20.0x MAX</button>
-                    </div>
+            <!-- Game 3 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="casual">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-red-500 to-pink-600 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-cube"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Roblox</h3>
+                    <p class="text-xs text-gray-400 font-mono">Luau / C++</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-neon">
+                    <span>Lua Injection</span>
+                    <span>ARM64</span>
                 </div>
             </div>
 
-            <!-- TAB 3: HEX VIEWER -->
-            <div id="sim-tab-hex" class="pt-6 space-y-4 hidden font-mono text-xs">
-                <div class="flex justify-between items-center text-gray-400">
-                    <span>MEMORY REGION: 0x7F8C0000 - 0x7F8C00FF</span>
-                    <button onclick="generateHexDump()" class="btn-3d btn-3d-dark px-3 py-1 text-[10px]">
-                        <i class="fa-solid fa-arrows-rotate mr-1"></i> REFRESH HEX
-                    </button>
+            <!-- Game 4 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="br">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-black text-2xl shadow-lg">
+                    <i class="fa-solid fa-fire"></i>
                 </div>
-                <div id="hex-view-container" class="bg-black/60 border border-cyber-border p-4 rounded-xl font-mono text-cyber-cyan overflow-x-auto leading-relaxed space-y-1">
-                    <!-- Dynamic Hex Lines Generated Here -->
+                <div>
+                    <h3 class="text-lg font-bold text-white">Free Fire MAX</h3>
+                    <p class="text-xs text-gray-400 font-mono">Unity IL2CPP</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-cyan">
+                    <span>Offset Hook</span>
+                    <span>Supported</span>
                 </div>
             </div>
 
-            <!-- TAB 4: LUA SCRIPT ENGINE -->
-            <div id="sim-tab-lua" class="pt-6 space-y-4 hidden font-mono">
-                <div class="grid md:grid-cols-12 gap-4">
-                    <div class="md:col-span-7">
-                        <label class="block text-xs text-gray-400 mb-2">LUA EDITOR</label>
-                        <textarea id="lua-code-editor" rows="7" class="w-full bg-black/60 border border-cyber-border rounded-xl p-3 text-cyber-neon font-mono text-xs outline-none focus:border-cyber-cyan">
--- Game Guardian Lua Injection Script
-gg.clearResults()
-gg.searchNumber("1000", gg.TYPE_DWORD)
-gg.getResults(100)
-gg.editAll("999999", gg.TYPE_DWORD)
-gg.toast("Memory Patcher Completed Successfully!")
-                        </textarea>
-                        <button onclick="executeLuaScript()" class="btn-3d btn-3d-emerald w-full py-3 text-xs mt-3">
-                            <i class="fa-solid fa-play mr-2"></i> EXECUTE LUA SCRIPT
-                        </button>
-                    </div>
-                    <div class="md:col-span-5">
-                        <label class="block text-xs text-gray-400 mb-2">CONSOLE LOGS</label>
-                        <div id="lua-console-output" class="bg-black/80 border border-cyber-border rounded-xl p-3 text-gray-300 font-mono text-[11px] h-48 overflow-y-auto space-y-1">
-                            <div class="text-gray-500">[SYSTEM] Lua Engine v5.3 ready.</div>
-                        </div>
-                    </div>
+            <!-- Game 5 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="action">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-slate-700 to-slate-900 flex items-center justify-center text-cyber-cyan text-2xl shadow-lg border border-cyber-cyan/30">
+                    <i class="fa-solid fa-person-rifle"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Call of Duty: Mobile</h3>
+                    <p class="text-xs text-gray-400 font-mono">Unity Engine</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-purple">
+                    <span>Hex Edit</span>
+                    <span>Active</span>
+                </div>
+            </div>
+
+            <!-- Game 6 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="moba">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-800 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Mobile Legends</h3>
+                    <p class="text-xs text-gray-400 font-mono">Unity IL2CPP</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-neon">
+                    <span>Drone Hook</span>
+                    <span>Safe</span>
+                </div>
+            </div>
+
+            <!-- Game 7 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="action">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Genshin Impact</h3>
+                    <p class="text-xs text-gray-400 font-mono">Custom Unity</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-cyan">
+                    <span>Speedhack</span>
+                    <span>v4.6+</span>
+                </div>
+            </div>
+
+            <!-- Game 8 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="action">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-800 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-gun"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Standoff 2</h3>
+                    <p class="text-xs text-gray-400 font-mono">Unity IL2CPP</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-purple">
+                    <span>Chams/Dword</span>
+                    <span>Ready</span>
+                </div>
+            </div>
+
+            <!-- Game 9 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="casual">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-emerald-500 to-green-700 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-cubes"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Minecraft PE</h3>
+                    <p class="text-xs text-gray-400 font-mono">C++ Bedrock</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-neon">
+                    <span>RAM Mod</span>
+                    <span>Full Access</span>
+                </div>
+            </div>
+
+            <!-- Game 10 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="casual">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-black text-2xl shadow-lg">
+                    <i class="fa-solid fa-train"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Subway Surfers</h3>
+                    <p class="text-xs text-gray-400 font-mono">Unity Engine</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-cyan">
+                    <span>Coin/Score</span>
+                    <span>Instant</span>
+                </div>
+            </div>
+
+            <!-- Game 11 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="moba">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-yellow-500 to-red-600 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Clash Royale</h3>
+                    <p class="text-xs text-gray-400 font-mono">Supercell Engine</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-purple">
+                    <span>Private Server</span>
+                    <span>Supported</span>
+                </div>
+            </div>
+
+            <!-- Game 12 -->
+            <div class="card-3d p-6 rounded-2xl space-y-4 game-card" data-category="casual">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-red-600 to-purple-800 flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Asphalt 9: Legends</h3>
+                    <p class="text-xs text-gray-400 font-mono">Custom C++ Engine</p>
+                </div>
+                <div class="pt-2 border-t border-cyber-border flex justify-between text-[11px] font-mono text-cyber-neon">
+                    <span>Speed Hack</span>
+                    <span>Tested</span>
                 </div>
             </div>
 
@@ -557,128 +571,67 @@ gg.toast("Memory Patcher Completed Successfully!")
     <!-- 3D FEATURE GRID SECTION -->
     <section id="features" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
         <div class="text-center space-y-4 mb-16">
-            <span class="btn-3d btn-3d-dark px-4 py-1.5 text-xs text-cyber-purple">MİMARİ ÖZELLİKLER</span>
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Neden GG.ENGINE X?</h2>
+            <span class="btn-3d btn-3d-dark px-4 py-1.5 text-xs text-cyber-purple" data-i18n="tag_arch">GÜÇLÜ MİMARİ</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white" data-i18n="title_features">Metich Rays Ayrıcalıkları</h2>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <!-- Feature 1 -->
             <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
                 <div class="w-14 h-14 rounded-2xl bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan text-2xl">
                     <i class="fa-solid fa-microchip"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white">XOR & Fuzzy Search</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Kriptolanmış veya dinamik değişen bellek değerlerini Fuzzy (Bilinmeyen Değer) tarama algoritmalarıyla saniyeler içinde çözün.
+                <h3 class="text-xl font-bold text-white" data-i18n="feat_1_title">IL2CPP Dumper & Hex</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat_1_desc">
+                    `dump.cs` verilerini ve `libil2cpp.so` offsetlerini otomatik analiz edin. Hex düzenlemelerini doğrudan RAM üzerine uygulayın.
                 </p>
-                <div class="pt-2 text-xs font-mono text-cyber-cyan flex items-center gap-2">
-                    <span>ARM64 DIRECT ACCESS</span> <i class="fa-solid fa-arrow-right"></i>
-                </div>
             </div>
 
-            <!-- Feature 2 -->
             <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
                 <div class="w-14 h-14 rounded-2xl bg-cyber-purple/10 border border-cyber-purple/30 flex items-center justify-center text-cyber-purple text-2xl">
                     <i class="fa-solid fa-ghost"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white">Stealth Process Hiding</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Anti-cheat sistemlerini atlatmak için rastgele paket isimleri (Randomized Package Name) ve Root Hide teknikleri kullanır.
+                <h3 class="text-xl font-bold text-white" data-i18n="feat_2_title">Anti-Cheat Stealth Bypass</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat_2_desc">
+                    Rastgele paket ismi oluşturucu ve gizli root modülleri ile koruma sistemleri tarafından algılanmadan çalışır.
                 </p>
-                <div class="pt-2 text-xs font-mono text-cyber-purple flex items-center gap-2">
-                    <span>BYPASS SYSTEM</span> <i class="fa-solid fa-arrow-right"></i>
-                </div>
             </div>
 
-            <!-- Feature 3 -->
             <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
                 <div class="w-14 h-14 rounded-2xl bg-cyber-neon/10 border border-cyber-neon/30 flex items-center justify-center text-cyber-neon text-2xl">
-                    <i class="fa-solid fa-link"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white">Pointer Chain Finder</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Statik offset adreslerini bulmak için derinlemesine pointer zinciri taraması gerçekleştirin ve kalıcı yamalar hazırlayın.
-                </p>
-                <div class="pt-2 text-xs font-mono text-cyber-neon flex items-center gap-2">
-                    <span>STATIC POINTERS</span> <i class="fa-solid fa-arrow-right"></i>
-                </div>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
-                <div class="w-14 h-14 rounded-2xl bg-cyber-pink/10 border border-cyber-pink/30 flex items-center justify-center text-cyber-pink text-2xl">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white">Speedhack Engine</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    C++ seviyesinde sistem saatlerini manipüle ederek oyun içi animasyonları, soğuma sürelerini ve hareket hızını ayarlayın.
-                </p>
-                <div class="pt-2 text-xs font-mono text-cyber-pink flex items-center gap-2">
-                    <span>TIME MANIPULATION</span> <i class="fa-solid fa-arrow-right"></i>
-                </div>
-            </div>
-
-            <!-- Feature 5 -->
-            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
-                <div class="w-14 h-14 rounded-2xl bg-cyber-amber/10 border border-cyber-amber/30 flex items-center justify-center text-cyber-amber text-2xl">
-                    <i class="fa-solid fa-code-merge"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white">Lua 5.3 Scripting</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Karmaşık bellek düzenleme adımlarını tek tıkla çalıştırılabilen otomatize menülere ve özel mod scriptlerine dönüştürün.
-                </p>
-                <div class="pt-2 text-xs font-mono text-cyber-amber flex items-center gap-2">
-                    <span>AUTOMATION ENGINE</span> <i class="fa-solid fa-arrow-right"></i>
-                </div>
-            </div>
-
-            <!-- Feature 6 -->
-            <div class="card-3d p-8 rounded-2xl space-y-4 relative overflow-hidden group">
-                <div class="w-14 h-14 rounded-2xl bg-cyber-blue/10 border border-cyber-blue/30 flex items-center justify-center text-cyber-blue text-2xl">
                     <i class="fa-solid fa-[#00f2fe] fa-display"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white">3D Floating Overlay</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Oyun oynarken ekranın üstünde yüzen dokunsal ve saydamlaştırılabilir 3D kontrol arayüzü ile kesintisiz erişim sağlayın.
+                <h3 class="text-xl font-bold text-white" data-i18n="feat_3_title">Floating Menu (Overlay)</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat_3_desc">
+                    Oyun sırasında ekran üzerinde yüzen, saydamlığı ayarlanabilir ve dokunma dostu 3D kontrol menüsü.
                 </p>
-                <div class="pt-2 text-xs font-mono text-cyber-blue flex items-center gap-2">
-                    <span>FLOATING WINDOW</span> <i class="fa-solid fa-arrow-right"></i>
-                </div>
             </div>
 
         </div>
     </section>
 
-    <!-- DOWNLOAD SECTION WITH 3D BUTTONS -->
+    <!-- DOWNLOAD SECTION -->
     <section id="download" class="py-20 px-4 sm:px-8 max-w-5xl mx-auto">
         <div class="card-3d rounded-3xl p-8 sm:p-12 text-center space-y-8 relative overflow-hidden border-2 border-cyber-cyan/30">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyber-cyan/20 text-cyber-cyan font-mono text-xs">
-                <i class="fa-solid fa-download"></i> RESMİ APK SÜRÜMÜ
+                <i class="fa-solid fa-download"></i> METICH RAYS OFFICIAL
             </div>
 
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-white">
-                GG.ENGINE X'i Hemen Edinin
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white" data-i18n="download_title">
+                Metich Rays'ı Şimdi İndirin
             </h2>
 
-            <p class="text-gray-300 max-w-xl mx-auto text-sm sm:text-base font-sans">
-                Android 5.0 ve üstü tüm cihazlarla uyumludur. Virtual Master, VPhoneGAGA veya Root'lu cihazlarda sorunsuz çalışır.
+            <p class="text-gray-300 max-w-xl mx-auto text-sm sm:text-base font-sans" data-i18n="download_desc">
+                Root'lu cihazlarda tam yetkiyle, Root'suz cihazlarda ise Virtual Master / VPhoneGAGA sanal alanlarında sorunsuz çalışır.
             </p>
 
-            <!-- Big 3D Download CTA -->
             <div class="flex flex-col sm:flex-row justify-center items-center gap-6 pt-4">
-                <a href="#" onclick="alert('İndirme Başlatıldı: GG_Engine_v10.4_Official.apk')" class="btn-3d btn-3d-cyan px-10 py-5 text-base w-full sm:w-auto">
-                    <i class="fa-solid fa-download mr-3 text-xl"></i> INDIR (OFFICIAL APK)
+                <a href="#" onclick="alert('Metich Rays APK İndirmesi Başlatıldı!')" class="btn-3d btn-3d-cyan px-10 py-5 text-base w-full sm:w-auto">
+                    <i class="fa-solid fa-download mr-3 text-xl"></i> METICH RAYS APK (ROOT)
                 </a>
-                <a href="#" onclick="alert('İndirme Başlatıldı: GG_Engine_NoRoot_Space.apk')" class="btn-3d btn-3d-purple px-10 py-5 text-base w-full sm:w-auto">
+                <a href="#" onclick="alert('Metich Rays Virtual APK İndirmesi Başlatıldı!')" class="btn-3d btn-3d-purple px-10 py-5 text-base w-full sm:w-auto">
                     <i class="fa-solid fa-box-archive mr-3 text-xl"></i> NO-ROOT VIRTUAL APK
                 </a>
-            </div>
-
-            <!-- Hash Hashes -->
-            <div class="pt-8 border-t border-cyber-border font-mono text-xs text-gray-400 space-y-1">
-                <div>MD5: <span class="text-cyber-cyan">e8f921a4b2c19382f019a2e84700b1d2</span></div>
-                <div>SHA-256: <span class="text-cyber-purple">8f92a104b2c83d91720d291f02c9182736182937402019283a00918273641293</span></div>
             </div>
         </div>
     </section>
@@ -688,35 +641,181 @@ gg.toast("Memory Patcher Completed Successfully!")
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-lg bg-cyber-cyan/20 flex items-center justify-center text-cyber-cyan font-bold">
-                    GG
+                    MR
                 </div>
-                <span>© 2026 GG.ENGINE LABORATORY. ALL RIGHTS RESERVED.</span>
-            </div>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-cyber-cyan transition-colors">PRIVACY POLICY</a>
-                <a href="#" class="hover:text-cyber-cyan transition-colors">TERMS OF SERVICE</a>
-                <a href="#" class="hover:text-cyber-cyan transition-colors">DOCUMENTATION</a>
+                <span>© 2026 METICH RAYS LABORATORY. ALL RIGHTS RESERVED.</span>
             </div>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT & ANIME.JS LOGIC -->
+    <!-- JAVASCRIPT & ANIME.JS & MULTI-LANGUAGE SCRIPT -->
     <script>
-        // --- 1. HERO TILT EFFECT WITH ANIME.JS / JS ---
+        // --- 1. MULTI-LANGUAGE TRANSLATION DICTIONARY ---
+        const translations = {
+            tr: {
+                nav_games: "Desteklenen Oyunlar",
+                nav_features: "Özellikler",
+                nav_download: "İndir",
+                btn_get_apk: "APK İNDİR",
+                hero_badge: "ANDROID 15+ & ARM64 DESTEKLİ",
+                hero_title_1: "Mobil Oyunları",
+                hero_title_2: "İle Yönetin.",
+                hero_desc: "Metich Rays; Android cihazlarınızda bellek adreslerini (RAM), float/dword değerlerini, offsetleri ve hız ayarlarını yüzen 3D menü üzerinden anlık olarak düzenlemenizi sağlar.",
+                btn_download_now: "METICH RAYS İNDİR",
+                btn_view_games: "OYUNLARI İNCELE",
+                stat_downloads: "İNDİRME",
+                stat_arch: "MİMARİ",
+                stat_stealth: "GİZLİLİK",
+                tag_supported: "UYUMLULUK LİSTESİ",
+                title_supported_games: "Desteklenen Popüler Oyunlar",
+                desc_supported_games: "Metich Rays motoru, aşağıdaki mobil oyunlar başta olmak üzere tüm Unity (IL2CPP), Unreal Engine ve Native C++ altyapılı oyunlarda bellek ve offset düzenlemelerini destekler.",
+                cat_all: "HEPSİ",
+                cat_action: "AKSİYON / FPS",
+                cat_br: "BATTLE ROYALE",
+                cat_moba: "MOBA & ARENA",
+                cat_casual: "SIMÜLASYON & ARCADE",
+                tag_arch: "GÜÇLÜ MİMARİ",
+                title_features: "Metich Rays Ayrıcalıkları",
+                feat_1_title: "IL2CPP Dumper & Hex",
+                feat_1_desc: "`dump.cs` verilerini ve `libil2cpp.so` offsetlerini otomatik analiz edin. Hex düzenlemelerini doğrudan RAM üzerine uygulayın.",
+                feat_2_title: "Anti-Cheat Stealth Bypass",
+                feat_2_desc: "Rastgele paket ismi oluşturucu ve gizli root modülleri ile koruma sistemleri tarafından algılanmadan çalışır.",
+                feat_3_title: "Floating Menu (Overlay)",
+                feat_3_desc: "Oyun sırasında ekran üzerinde yüzen, saydamlığı ayarlanabilir ve dokunma dostu 3D kontrol menüsü.",
+                download_title: "Metich Rays'ı Şimdi İndirin",
+                download_desc: "Root'lu cihazlarda tam yetkiyle, Root'suz cihazlarda ise Virtual Master / VPhoneGAGA sanal alanlarında sorunsuz çalışır."
+            },
+            en: {
+                nav_games: "Supported Games",
+                nav_features: "Features",
+                nav_download: "Download",
+                btn_get_apk: "GET APK",
+                hero_badge: "ANDROID 15+ & ARM64 SUPPORTED",
+                hero_title_1: "Control Mobile Games",
+                hero_title_2: "With Precision.",
+                hero_desc: "Metich Rays allows real-time modification of RAM addresses, float/dword values, offsets, and speed settings via a floating 3D overlay menu on Android.",
+                btn_download_now: "DOWNLOAD METICH RAYS",
+                btn_view_games: "VIEW GAMES",
+                stat_downloads: "DOWNLOADS",
+                stat_arch: "ARCHITECTURE",
+                stat_stealth: "STEALTH",
+                tag_supported: "COMPATIBILITY LIST",
+                title_supported_games: "Supported Popular Games",
+                desc_supported_games: "Metich Rays engine supports memory and offset modifications for all Unity (IL2CPP), Unreal Engine, and Native C++ games.",
+                cat_all: "ALL",
+                cat_action: "ACTION / FPS",
+                cat_br: "BATTLE ROYALE",
+                cat_moba: "MOBA & ARENA",
+                cat_casual: "SIMULATION & ARCADE",
+                tag_arch: "POWERFUL ARCHITECTURE",
+                title_features: "Metich Rays Features",
+                feat_1_title: "IL2CPP Dumper & Hex",
+                feat_1_desc: "Automatically analyze `dump.cs` data and `libil2cpp.so` offsets. Apply hex modifications directly to live memory.",
+                feat_2_title: "Anti-Cheat Stealth Bypass",
+                feat_2_desc: "Operates undetected using randomized package names and stealth root isolation modules.",
+                feat_3_title: "Floating Menu (Overlay)",
+                feat_3_desc: "A touch-friendly, customizable floating 3D overlay window accessible while gaming.",
+                download_title: "Download Metich Rays Now",
+                download_desc: "Works natively on rooted devices, or inside Virtual Master / VPhoneGAGA containers for non-root setups."
+            },
+            ru: {
+                nav_games: "Поддерживаемые Игры",
+                nav_features: "Функции",
+                nav_download: "Скачать",
+                btn_get_apk: "Скачать APK",
+                hero_badge: "ПОДДЕРЖКА ANDROID 15+ И ARM64",
+                hero_title_1: "Управляйте Играми",
+                hero_title_2: "С Metich Rays.",
+                hero_desc: "Metich Rays позволяет редактировать адреса памяти (RAM), значения float/dword, офсеты и скорость игры с помощью плавающего 3D-меню.",
+                btn_download_now: "СКАЧАТЬ METICH RAYS",
+                btn_view_games: "СМОТРЕТЬ ИГРЫ",
+                stat_downloads: "СКАЧИВАНИЙ",
+                stat_arch: "АРХИТЕКТУРА",
+                stat_stealth: "СКРЫТНОСТЬ",
+                tag_supported: "СПИСОК СОВМЕСТИМОСТИ",
+                title_supported_games: "Поддерживаемые Популярные Игры",
+                desc_supported_games: "Движок Metich Rays поддерживает редактирование памяти в играх на базе Unity (IL2CPP), Unreal Engine и Native C++.",
+                cat_all: "ВСЕ",
+                cat_action: "ЭКШЕН / FPS",
+                cat_br: "КОРОЛЕВСКАЯ БИТВА",
+                cat_moba: "MOBA И АРЕНА",
+                cat_casual: "АРКАДЫ И СИМУЛЯТОРЫ",
+                tag_arch: "МОЩНАЯ АРХИТЕКТУРА",
+                title_features: "Преимущества Metich Rays",
+                feat_1_title: "IL2CPP Dumper & Hex",
+                feat_1_desc: "Автоматический анализ `dump.cs` и офсетов `libil2cpp.so`. Применение Hex-патчей в оперативной памяти.",
+                feat_2_title: "Обход Античита (Stealth)",
+                feat_2_desc: "Работает незаметно благодаря рандомизации имени пакета и изолированным root-модулям.",
+                feat_3_title: "Плавающее Меню (Overlay)",
+                feat_3_desc: "Удобное плавающее 3D-меню с настройкой прозрачности поверх вашей игры.",
+                download_title: "Скачать Metich Rays Прямо Сейчас",
+                download_desc: "Работает с Root-правами или в виртуальных средах Virtual Master / VPhoneGAGA без Root."
+            }
+        };
+
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    anime({
+                        targets: el,
+                        opacity: [1, 0, 1],
+                        duration: 300,
+                        easing: 'easeInOutQuad',
+                        update: function(anim) {
+                            if(anim.progress > 50) {
+                                el.innerText = translations[lang][key];
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        // --- 2. GAME FILTER LOGIC ---
+        function filterGames(category) {
+            const cards = document.querySelectorAll('.game-card');
+            const btns = document.querySelectorAll('.filter-btn');
+
+            btns.forEach(b => {
+                b.classList.remove('btn-3d-cyan');
+                b.classList.add('btn-3d-dark');
+            });
+
+            event.currentTarget.classList.remove('btn-3d-dark');
+            event.currentTarget.classList.add('btn-3d-cyan');
+
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                if (category === 'all' || cat === category) {
+                    card.style.display = 'block';
+                    anime({
+                        targets: card,
+                        scale: [0.8, 1],
+                        opacity: [0, 1],
+                        duration: 400,
+                        easing: 'easeOutExpo'
+                    });
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // --- 3. HERO TILT & COUNTER ANIMATION ---
         const tiltCard = document.getElementById('hero-tilt-card');
         document.addEventListener('mousemove', (e) => {
             const { clientX, clientY } = e;
             const { innerWidth, innerHeight } = window;
-            
-            const rotateX = ((clientY / innerHeight) - 0.5) * -20;
-            const rotateY = ((clientX / innerWidth) - 0.5) * 20;
+            const rotateX = ((clientY / innerHeight) - 0.5) * -15;
+            const rotateY = ((clientX / innerWidth) - 0.5) * 15;
 
             if (tiltCard) {
                 tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             }
         });
 
-        // --- 2. STATS COUNTER WITH ANIME.JS ---
         document.addEventListener('DOMContentLoaded', () => {
             const counters = document.querySelectorAll('.stat-counter');
             counters.forEach(counter => {
@@ -727,183 +826,11 @@ gg.toast("Memory Patcher Completed Successfully!")
                     easing: 'easeOutExpo',
                     round: 1,
                     duration: 2500,
-                    formatter: (val) => {
-                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    }
+                    formatter: (val) => val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 });
             });
-
-            // Initialize simulator results
-            runSimSearch();
-            generateHexDump();
         });
-
-        // --- 3. HERO INTERACTIVE WIDGET FUNCTIONS ---
-        let isHeroFrozen = false;
-        function triggerHeroScan() {
-            const progressBar = document.getElementById('hero-progress-bar');
-            const pctText = document.getElementById('hero-scan-pct');
-            const liveVal = document.getElementById('hero-live-val');
-
-            anime({
-                targets: progressBar,
-                width: ['0%', '100%'],
-                duration: 1200,
-                easing: 'easeInOutQuad',
-                update: function(anim) {
-                    pctText.innerText = Math.round(anim.progress) + '%';
-                },
-                complete: function() {
-                    liveVal.innerText = Math.floor(Math.random() * 899999999 + 100000000).toLocaleString();
-                }
-            });
-        }
-
-        function freezeHeroVal() {
-            const btn = document.getElementById('freeze-btn');
-            const liveVal = document.getElementById('hero-live-val');
-            isHeroFrozen = !isHeroFrozen;
-
-            if(isHeroFrozen) {
-                btn.classList.remove('btn-3d-emerald');
-                btn.classList.add('btn-3d-purple');
-                btn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i> FROZEN';
-                liveVal.classList.add('neon-text-pink');
-            } else {
-                btn.classList.remove('btn-3d-purple');
-                btn.classList.add('btn-3d-emerald');
-                btn.innerHTML = '<i class="fa-solid fa-snowflake mr-2"></i> FREEZE VALUE';
-                liveVal.classList.remove('neon-text-pink');
-            }
-        }
-
-        // --- 4. SIMULATOR TAB SWITCHING ---
-        function switchSimTab(tabName) {
-            const tabs = ['search', 'speed', 'hex', 'lua'];
-            tabs.forEach(t => {
-                document.getElementById(`sim-tab-${t}`).classList.add('hidden');
-                const btn = document.getElementById(`tab-btn-${t}`);
-                btn.className = "px-4 py-2 rounded-lg text-gray-400 hover:text-white transition-all";
-            });
-
-            document.getElementById(`sim-tab-${tabName}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`tab-btn-${tabName}`);
-            activeBtn.className = "px-4 py-2 rounded-lg bg-cyber-cyan text-black font-bold shadow-md transition-all";
-        }
-
-        // --- 5. SIMULATOR SEARCH ENGINE SIMULATION ---
-        function runSimSearch() {
-            const valInput = document.getElementById('sim-search-input').value || "1000";
-            const typeInput = document.getElementById('sim-type-select').value.toUpperCase();
-            const resultsContainer = document.getElementById('sim-results-list');
-
-            resultsContainer.innerHTML = '';
-
-            // Generate 4 fake memory addresses
-            for (let i = 0; i < 4; i++) {
-                const randomAddr = '0x7F' + Math.floor(Math.random()*16777215).toString(16).toUpperCase();
-                const row = document.createElement('div');
-                row.className = "grid grid-cols-12 p-3 items-center hover:bg-cyber-card/60 transition-colors";
-                row.innerHTML = `
-                    <div class="col-span-4 font-bold text-cyber-cyan">${randomAddr}</div>
-                    <div class="col-span-3 text-gray-400">${typeInput}</div>
-                    <div class="col-span-3 font-bold text-cyber-neon sim-val-cell">${valInput}</div>
-                    <div class="col-span-2 text-right">
-                        <button onclick="editSimRow(this)" class="btn-3d btn-3d-dark px-2 py-1 text-[10px]">
-                            <i class="fa-solid fa-pen"></i> DÜZENLE
-                        </button>
-                    </div>
-                `;
-                resultsContainer.appendChild(row);
-            }
-
-            anime({
-                targets: '#sim-results-list div',
-                opacity: [0, 1],
-                translateY: [10, 0],
-                delay: anime.stagger(80)
-            });
-        }
-
-        function editSimRow(btn) {
-            const valCell = btn.parentElement.parentElement.querySelector('.sim-val-cell');
-            const newVal = prompt("Yeni Değeri Girin:", "999999");
-            if (newVal !== null) {
-                valCell.innerText = newVal;
-                anime({
-                    targets: valCell,
-                    scale: [1.3, 1],
-                    color: ['#ff007f', '#39ff14'],
-                    duration: 600
-                });
-            }
-        }
-
-        // --- 6. SPEEDHACK ENGINE ---
-        function updateSpeedhack(val) {
-            document.getElementById('speed-multiplier-display').innerText = parseFloat(val).toFixed(1) + 'x';
-        }
-
-        function setSpeedPreset(val) {
-            document.getElementById('speed-slider').value = val;
-            updateSpeedhack(val);
-            anime({
-                targets: '#speed-multiplier-display',
-                scale: [1.2, 1],
-                duration: 300
-            });
-        }
-
-        // --- 7. HEX DUMP GENERATOR ---
-        function generateHexDump() {
-            const container = document.getElementById('hex-view-container');
-            container.innerHTML = '';
-            
-            for (let i = 0; i < 8; i++) {
-                const addr = '0x7F8C00' + (i * 16).toString(16).toUpperCase().padStart(2, '0');
-                let hexBytes = '';
-                let asciiStr = '';
-
-                for (let j = 0; j < 16; j++) {
-                    const byteVal = Math.floor(Math.random() * 255);
-                    hexBytes += byteVal.toString(16).toUpperCase().padStart(2, '0') + ' ';
-                    asciiStr += (byteVal > 31 && byteVal < 127) ? String.fromCharCode(byteVal) : '.';
-                }
-
-                const line = document.createElement('div');
-                line.className = "flex justify-between gap-4 font-mono";
-                line.innerHTML = `
-                    <span class="text-gray-500">${addr}</span>
-                    <span class="text-cyber-cyan">${hexBytes}</span>
-                    <span class="text-gray-400">|${asciiStr}|</span>
-                `;
-                container.appendChild(line);
-            }
-        }
-
-        // --- 8. LUA SCRIPT EXECUTION SIMULATOR ---
-        function executeLuaScript() {
-            const consoleBox = document.getElementById('lua-console-output');
-            const timestamp = new Date().toLocaleTimeString();
-            
-            const logs = [
-                `[${timestamp}] Executing Lua script...`,
-                `[${timestamp}] gg.clearResults() -> Cleared 0 items.`,
-                `[${timestamp}] gg.searchNumber() -> Found 1,420 addresses.`,
-                `[${timestamp}] gg.editAll() -> Replaced 1,420 values to 999999.`,
-                `[${timestamp}] SUCCESS: Memory Injection Executed!`
-            ];
-
-            logs.forEach((log, index) => {
-                setTimeout(() => {
-                    const line = document.createElement('div');
-                    line.className = index === logs.length - 1 ? "text-cyber-neon font-bold" : "text-gray-300";
-                    line.innerText = log;
-                    consoleBox.appendChild(line);
-                    consoleBox.scrollTop = consoleBox.scrollHeight;
-                }, index * 300);
-            });
-        }
     </script>
 </body>
 </html>
+
