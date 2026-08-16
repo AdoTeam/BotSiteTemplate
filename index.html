@@ -1,192 +1,255 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İki Kişilik Kart Oyunu</title>
+    <title>GameGuardian X - Android Memory Engine</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#00f2fe',
+                            600: '#4facfe',
+                            accent: '#7928CA',
+                            dark: '#090d16',
+                            card: '#111827',
+                            border: 'rgba(255, 255, 255, 0.08)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
         body {
-            display: flex;
-            margin: 0;
-            height: 100vh;
-            background-color: #f4f4f9;
+            background-color: #060911;
+            color: #f3f4f6;
+            overflow-x: hidden;
         }
-        .panel {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .glow-bg {
+            background: radial-gradient(circle at 50% 20%, rgba(79, 172, 254, 0.15) 0%, rgba(121, 40, 202, 0.1) 40%, rgba(6, 9, 17, 0) 70%);
         }
-        .player-panel {
-            background-color: #ffffff;
-            border-left: 2px solid #ccc;
-            border-right: 2px solid #ccc;
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .center-panel {
-            flex: 0.8;
-            justify-content: center;
-            background-color: #e9ecef;
+        .glass-card {
+            background: rgba(22, 30, 49, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: border-color 0.3s ease;
         }
-        h2 {
-            margin-top: 0;
-            color: #333;
+        .glass-card:hover {
+            border-color: rgba(0, 242, 254, 0.4);
         }
-        #draw-btn {
-            padding: 20px 40px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: 0.2s;
-        }
-        #draw-btn:hover {
-            background-color: #0056b3;
-        }
-        .turn-text {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #d9534f;
-        }
-        .inventory {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            max-width: 250px;
-            margin-top: 15px;
-        }
-        .card {
-            border: 2px solid #555;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            background-color: #fff3cd;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .delete-btn {
-            padding: 8px;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .delete-btn:hover {
-            background-color: #c82333;
+        .cyber-grid {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
     </style>
 </head>
-<body>
+<body class="cyber-grid font-sans antialiased selection:bg-brand-500 selection:text-black">
 
-    <!-- Sol Kısım: Player 1 -->
-    <div class="panel player-panel">
-        <h2>Player 1</h2>
-        <p>Kart Sayısı: <span id="p1-count">0</span> / 7</p>
-        <div id="p1-inventory" class="inventory"></div>
-    </div>
+    <!-- ARKA PLAN IŞIKLARI -->
+    <div class="fixed inset-0 glow-bg pointer-events-none z-0"></div>
 
-    <!-- Orta Kısım: Zar ve Sıra -->
-    <div class="panel center-panel">
-        <div id="turn-display" class="turn-text">Sıra: Player 1</div>
-        <button id="draw-btn" onclick="drawCard()">Kart Çek</button>
-    </div>
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center shadow-lg shadow-brand-500/20 logo-icon">
+                    <i class="fa-solid fa-microchip text-xl text-white"></i>
+                </div>
+                <span class="font-extrabold text-xl tracking-wider text-white font-mono">GG<span class="text-brand-500">.ENGINE</span></span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+                <a href="#features" class="hover:text-brand-500 transition-colors">Özellikler</a>
+                <a href="#simulator" class="hover:text-brand-500 transition-colors">Canlı Simülatör</a>
+                <a href="#specs" class="hover:text-brand-500 transition-colors">Teknik Detaylar</a>
+                <a href="#faq" class="hover:text-brand-500 transition-colors">SSS</a>
+            </div>
 
-    <!-- Sağ Kısım: Player 2 -->
-    <div class="panel player-panel">
-        <h2>Player 2</h2>
-        <p>Kart Sayısı: <span id="p2-count">0</span> / 7</p>
-        <div id="p2-inventory" class="inventory"></div>
-    </div>
+            <div class="flex items-center gap-4">
+                <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> v101.0 Stable
+                </span>
+                <a href="#download" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-black font-semibold text-sm shadow-lg shadow-brand-500/25 hover:opacity-90 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                    İndir (APK)
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    <script>
-        // Oyun Ayarları ve Değişkenler
-        const cardTypes = ["Kötülük", "Güç", "Bilgelik", "Element"];
-        const maxCards = 7;
-        
-        let p1Cards = [];
-        let p2Cards = [];
-        let currentTurn = 1;
+    <!-- HERO SECTION -->
+    <section class="relative pt-36 pb-20 px-6 max-w-7xl mx-auto z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/20 border border-brand-accent/40 text-purple-300 text-xs font-mono mb-6 hero-badge opacity-0">
+                    <i class="fa-solid fa-bolt text-amber-400"></i> Android 5.0 - 15+ & ARM64 Desteği
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight text-white mb-6 hero-title opacity-0">
+                    Oyun Belleğini <br>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 via-brand-600 to-purple-400">
+                        Sınırların Ötesinde
+                    </span> <br>
+                    Yönetin.
+                </h1>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed hero-desc opacity-0 max-w-xl">
+                    Android platformu için geliştirilmiş en güçlü Hex/RAM düzenleyici. Offsets arama, pointer zincirleme, hız hilesi (Speedhack) ve Lua betik motoru tek bir yüzen arayüzde.
+                </p>
+                <div class="flex flex-wrap gap-4 hero-btns opacity-0">
+                    <a href="#download" class="px-8 py-4 rounded-xl bg-gradient-to-r from-brand-500 to-brand-600 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-brand-500/20 hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-download text-lg"></i>
+                        <span>GG Engine APK İndir</span>
+                    </a>
+                    <a href="#simulator" class="px-8 py-4 rounded-xl glass-panel text-white font-semibold flex items-center gap-3 border border-brand-border hover:bg-white/5 transition-colors">
+                        <i class="fa-solid fa-terminal text-brand-500"></i>
+                        <span>Simülatörü Dene</span>
+                    </a>
+                </div>
 
-        // Kart Çekme Fonksiyonu
-        function drawCard() {
-            let activeCards = currentTurn === 1 ? p1Cards : p2Cards;
+                <!-- İSTATİSTİKLER -->
+                <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-brand-border hero-stats opacity-0">
+                    <div>
+                        <div class="text-2xl font-mono font-bold text-white stat-number" data-value="1500000">0</div>
+                        <div class="text-xs text-gray-500 font-mono mt-1">İndirme</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-mono font-bold text-brand-500 stat-number" data-value="64">0</div>
+                        <div class="text-xs text-gray-500 font-mono mt-1">Bit Mimarisi</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-mono font-bold text-purple-400 stat-number" data-value="99">0</div>
+                        <div class="text-xs text-gray-500 font-mono mt-1">% Tespit Edilemezlik</div>
+                    </div>
+                </div>
+            </div>
 
-            // Envanter doluluk kontrolü
-            if (activeCards.length >= maxCards) {
-                alert(`Player ${currentTurn} envanteri dolu! Lütfen kart çekmeden önce bir kart silin.`);
-                return; 
-            }
+            <!-- FLOATING UI MOCKUP -->
+            <div class="relative flex justify-center hero-mockup opacity-0">
+                <div class="w-full max-w-md glass-panel rounded-2xl p-5 border border-brand-border shadow-2xl relative">
+                    <!-- Üst Başlık / Bar -->
+                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-brand-border">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            <span class="text-xs font-mono text-gray-400 ml-2">com.game.target (PID: 8492)</span>
+                        </div>
+                        <i class="fa-solid fa-gear text-gray-400 hover:text-white cursor-pointer"></i>
+                    </div>
 
-            // Rastgele kart seçimi
-            let randomCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-            activeCards.push(randomCard);
+                    <!-- Yüzen Pencere Temsili -->
+                    <div class="space-y-3 font-mono text-xs">
+                        <div class="p-3 rounded-lg bg-black/40 border border-brand-border flex justify-between items-center">
+                            <span class="text-gray-400">Bulunan Adres:</span>
+                            <span class="text-brand-500 font-bold">0x7F8C409E20</span>
+                        </div>
+                        <div class="p-3 rounded-lg bg-black/40 border border-brand-border flex justify-between items-center">
+                            <span class="text-gray-400">Veri Tipi:</span>
+                            <span class="text-purple-400 font-bold">DWORD (4 Bytes)</span>
+                        </div>
+                        <div class="p-3 rounded-lg bg-black/40 border border-brand-border flex justify-between items-center">
+                            <span class="text-gray-400">Mevcut Değer:</span>
+                            <span class="text-emerald-400 font-bold glowing-value">1,000,000</span>
+                        </div>
 
-            // Sırayı değiştir
-            currentTurn = currentTurn === 1 ? 2 : 1;
+                        <!-- Progress Bar -->
+                        <div class="pt-2">
+                            <div class="flex justify-between text-gray-500 text-[10px] mb-1">
+                                <span>RAM Taraması (Region: Anonymous)</span>
+                                <span class="scan-percent">100%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-brand-600 to-brand-500 scan-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
 
-            // Ekranı güncelle
-            updateUI();
-        }
+                    <!-- Floating Action Button Mock -->
+                    <div class="absolute -right-5 -bottom-5 w-14 h-14 rounded-full bg-gradient-to-tr from-brand-600 to-brand-accent flex items-center justify-center shadow-lg shadow-brand-500/40 border border-white/20 float-icon">
+                        <i class="fa-solid fa-shield-halved text-xl text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Kart Silme Fonksiyonu
-        function deleteCard(playerNum, index) {
-            if (playerNum === 1) {
-                p1Cards.splice(index, 1);
-            } else {
-                p2Cards.splice(index, 1);
-            }
-            updateUI();
-        }
+    <!-- ÖZELLİKLER SEKTÖRÜ -->
+    <section id="features" class="py-24 px-6 max-w-7xl mx-auto z-10 relative">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500 mb-3">Gelişmiş Donanım</h2>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Sınırsız Özelleştirme ve Müdahale</h3>
+        </div>
 
-        // Ekranı Yenileme Fonksiyonu
-        function updateUI() {
-            // Sıra metnini güncelle
-            let turnText = document.getElementById("turn-display");
-            turnText.innerText = `Sıra: Player ${currentTurn}`;
-            turnText.style.color = currentTurn === 1 ? "#d9534f" : "#0275d8";
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Feature 1 -->
+            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
+                <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-xl mb-6 border border-brand-500/20">
+                    <i class="fa-solid fa-magnifying-glass font-mono"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Çoklu Bellek Taraması</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    DWORD, Float, QWORD, XOR korumalı değerler ve Otomatik Veri Tipi tespiti ile mili-saniyeler içinde RAM analizi.
+                </p>
+            </div>
 
-            // Player 1 Güncelleme
-            document.getElementById("p1-count").innerText = p1Cards.length;
-            let p1Html = "";
-            p1Cards.forEach((card, index) => {
-                p1Html += `
-                    <div class="card">
-                        ${card}
-                        <button class="delete-btn" onclick="deleteCard(1, ${index})">Sil</button>
-                    </div>`;
-            });
-            document.getElementById("p1-inventory").innerHTML = p1Html;
+            <!-- Feature 2 -->
+            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-6 border border-purple-500/20">
+                    <i class="fa-solid fa-gauge-high"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Gelişmiş Speedhack</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Oyun içi zaman akışını (Timers & ClockTicks) yavaşlatın veya 1000x kata kadar hızlandırın. Hem x86 hem ARM destekli.
+                </p>
+            </div>
 
-            // Player 2 Güncelleme
-            document.getElementById("p2-count").innerText = p2Cards.length;
-            let p2Html = "";
-            p2Cards.forEach((card, index) => {
-                p2Html += `
-                    <div class="card">
-                        ${card}
-                        <button class="delete-btn" onclick="deleteCard(2, ${index})">Sil</button>
-                    </div>`;
-            });
-            document.getElementById("p2-inventory").innerHTML = p2Html;
-        }
+            <!-- Feature 3 -->
+            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-6 border border-emerald-500/20">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Lua Script Motoru</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Kendi otomatik arama ve düzenleme scriptlerinizi yazın. Karmaşık bellek işlemleri için tek tıkla çalışan hazır menüler oluşturun.
+                </p>
+            </div>
 
-        // Başlangıçta ekranı bir kere oluştur
-        updateUI();
-    </script>
-</body>
-</html>
+            <!-- Feature 4 -->
+            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-6 border border-amber-500/20">
+                    <i class="fa-solid fa-user-ninja"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Stealth / Anti-Detection</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Rastgele paket adı (Random Package Name) oluşturucu ve sistem çağrılarını gizleyen korumalı sanallaştırma katmanı.
+                </p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="glass-card p-8 rounded-2xl feature-card opacity-0">
+                <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl mb-6 border border-rose-500/20">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Pointer Finder</h4>
+                <p class="text-gray-400 text-sm
